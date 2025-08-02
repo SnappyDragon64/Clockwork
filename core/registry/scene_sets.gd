@@ -6,8 +6,9 @@
 class_name SceneSets
 
 const TEST: SceneSetEntry = preload("res://data/core/scene_sets/test.tres")
+const MENU_MAIN_MENU: SceneSetEntry = preload("res://data/core/scene_sets/menu/main_menu.tres")
 
-static var ALL: Array[SceneSetEntry] = [TEST]
+static var ALL: Array[SceneSetEntry] = [TEST, MENU_MAIN_MENU]
 
 static func get_all() -> Array[SceneSetEntry]:
     return ALL

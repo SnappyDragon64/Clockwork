@@ -20,6 +20,7 @@ var detected_loops_buffer: Array
 
 
 @onready var player: Player = get_owner() as Player
+var loop_path_scene: PackedScene
 var loop_path: Path3D
 
 func _ready() -> void:
@@ -29,11 +30,12 @@ func _ready() -> void:
 	sample_timer.timeout.connect(_on_sample_timer_timeout)
 	add_child(sample_timer)
 
-	loop_path = preload(Scenes.PLAYER_LOOP_PATH.path).instantiate()
+	loop_path_scene = preload(Scenes.PLAYER_LOOP_PATH.path)
 	SceneSetManager.scene_set_initialized.connect(_on_scene_set_initialized)
 
 
 func _on_scene_set_initialized(_context: SceneSetContext) -> void:
+	loop_path = loop_path_scene.instantiate()
 	EventBus.publish(Events.SPAWN_ENTITY, { "entity": loop_path })
 
 

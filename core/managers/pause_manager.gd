@@ -7,7 +7,7 @@ signal resumed
 var pause_action_name: StringName = &"pause"
 
 var is_paused: bool = false
-var _can_pause: bool = false
+var _can_pause: bool = true
 
 var _action_exists_in_map: bool = false
 

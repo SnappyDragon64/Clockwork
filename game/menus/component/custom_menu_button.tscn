@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://diqpykxpvm737"]
+
+[ext_resource type="Script" uid="uid://c6x2d78owj1q6" path="res://game/menus/component/menu_button.gd" id="1_b1ye7"]
+[ext_resource type="Texture2D" uid="uid://dl2uei1ug4d8" path="res://assets/sprites/ui/pause_menu_card.png" id="1_ns301"]
+[ext_resource type="Texture2D" uid="uid://cs2og0f8iusso" path="res://assets/sprites/ui/pause_menu_gear.png" id="2_b1ye7"]
+[ext_resource type="FontFile" uid="uid://ddvse12mldifw" path="res://assets/fonts/Righteous-Regular.ttf" id="3_28h8n"]
+
+[node name="MenuButton" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_b1ye7")
+button_text = null
+
+[node name="Button" type="TextureButton" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 469.0
+offset_bottom = 72.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("1_ns301")
+
+[node name="CogHolder" type="Control" parent="Button"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Button/CogHolder"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -60.0
+offset_right = 59.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_b1ye7")
+
+[node name="ButtonText" type="Label" parent="Button"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("3_28h8n")
+theme_override_font_sizes/font_size = 40
+text = "TEXT"
+horizontal_alignment = 1
+vertical_alignment = 1

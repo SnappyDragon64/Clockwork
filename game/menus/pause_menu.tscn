@@ -1,18 +1,41 @@
 [gd_scene load_steps=4 format=3 uid="uid://dgtxcx5c1j1f6"]
 
 [ext_resource type="Texture2D" uid="uid://c3sduwab6njkt" path="res://assets/sprites/ui/pause_menu_bg.png" id="1_jpdlf"]
-[ext_resource type="Texture2D" uid="uid://dl2uei1ug4d8" path="res://assets/sprites/ui/pause_menu_card.png" id="2_7asoo"]
-[ext_resource type="Texture2D" uid="uid://cs2og0f8iusso" path="res://assets/sprites/ui/pause_menu_gear.png" id="3_k2nca"]
+[ext_resource type="Script" uid="uid://bva3o4s05w1ih" path="res://game/menus/pause_menu.gd" id="1_k2nca"]
+[ext_resource type="PackedScene" uid="uid://diqpykxpvm737" path="res://game/menus/component/custom_menu_button.tscn" id="2_7asoo"]
 
 [node name="PauseMenu" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_k2nca")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Filter" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.313726)
+
+[node name="MenuAnchor" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Background" type="TextureRect" parent="MenuAnchor"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -25,158 +48,86 @@ grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("1_jpdlf")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect"]
+[node name="ButtonContainer" type="HBoxContainer" parent="MenuAnchor/Background"]
 layout_mode = 0
 offset_bottom = 496.0
 rotation = 0.523599
 
-[node name="Control" type="Control" parent="TextureRect/HBoxContainer"]
+[node name="Padding" type="Control" parent="MenuAnchor/Background/ButtonContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuAnchor/Background/ButtonContainer"]
 layout_mode = 2
 
-[node name="Control6" type="Control" parent="TextureRect/HBoxContainer/VBoxContainer"]
+[node name="Padding1" type="Control" parent="MenuAnchor/Background/ButtonContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 
-[node name="Control" type="Control" parent="TextureRect/HBoxContainer/VBoxContainer"]
+[node name="ButtonHolder1" type="Control" parent="MenuAnchor/Background/ButtonContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect/HBoxContainer/VBoxContainer/Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuAnchor/Background/ButtonContainer/VBoxContainer/ButtonHolder1"]
 layout_mode = 2
-offset_right = 469.0
-offset_bottom = 72.0
+offset_top = 3.99997
+offset_right = 4.0
+offset_bottom = 3.99997
 rotation = -0.523599
-size_flags_horizontal = 0
-size_flags_vertical = 4
-texture = ExtResource("2_7asoo")
 
-[node name="Control" type="Control" parent="TextureRect/HBoxContainer/VBoxContainer/Control/TextureRect"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-grow_vertical = 2
+[node name="Padding" type="Control" parent="MenuAnchor/Background/ButtonContainer/VBoxContainer/ButtonHolder1/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect/HBoxContainer/VBoxContainer/Control/TextureRect/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -59.0
-offset_top = -60.0
-offset_right = 59.0
-offset_bottom = 60.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_k2nca")
+[node name="ResumeButton" parent="MenuAnchor/Background/ButtonContainer/VBoxContainer/ButtonHolder1/HBoxContainer" instance=ExtResource("2_7asoo")]
+unique_name_in_owner = true
+layout_mode = 2
+button_text = "RESUME"
 
-[node name="Label" type="Label" parent="TextureRect/HBoxContainer/VBoxContainer/Control/TextureRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Control4" type="Control" parent="TextureRect/HBoxContainer/VBoxContainer"]
+[node name="Padding2" type="Control" parent="MenuAnchor/Background/ButtonContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
 
-[node name="Control2" type="Control" parent="TextureRect/HBoxContainer/VBoxContainer"]
+[node name="ButtonHolder2" type="Control" parent="MenuAnchor/Background/ButtonContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect/HBoxContainer/VBoxContainer/Control2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuAnchor/Background/ButtonContainer/VBoxContainer/ButtonHolder2"]
 layout_mode = 2
-offset_right = 469.0
-offset_bottom = 72.0
+offset_top = 3.99997
+offset_right = 4.0
+offset_bottom = 3.99997
 rotation = -0.523599
-size_flags_horizontal = 0
-size_flags_vertical = 4
-texture = ExtResource("2_7asoo")
 
-[node name="Control" type="Control" parent="TextureRect/HBoxContainer/VBoxContainer/Control2/TextureRect"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-grow_vertical = 2
+[node name="Padding" type="Control" parent="MenuAnchor/Background/ButtonContainer/VBoxContainer/ButtonHolder2/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect/HBoxContainer/VBoxContainer/Control2/TextureRect/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -59.0
-offset_top = -60.0
-offset_right = 59.0
-offset_bottom = 60.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_k2nca")
+[node name="RestartButton" parent="MenuAnchor/Background/ButtonContainer/VBoxContainer/ButtonHolder2/HBoxContainer" instance=ExtResource("2_7asoo")]
+unique_name_in_owner = true
+layout_mode = 2
+button_text = "RESTART"
 
-[node name="Label" type="Label" parent="TextureRect/HBoxContainer/VBoxContainer/Control2/TextureRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Control5" type="Control" parent="TextureRect/HBoxContainer/VBoxContainer"]
+[node name="Padding3" type="Control" parent="MenuAnchor/Background/ButtonContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
 
-[node name="Control3" type="Control" parent="TextureRect/HBoxContainer/VBoxContainer"]
+[node name="ButtonHolder3" type="Control" parent="MenuAnchor/Background/ButtonContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect/HBoxContainer/VBoxContainer/Control3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuAnchor/Background/ButtonContainer/VBoxContainer/ButtonHolder3"]
 layout_mode = 2
-offset_right = 469.0
-offset_bottom = 72.0
+offset_top = 3.99997
+offset_right = 4.0
+offset_bottom = 3.99997
 rotation = -0.523599
-size_flags_horizontal = 0
-size_flags_vertical = 4
-texture = ExtResource("2_7asoo")
 
-[node name="Control" type="Control" parent="TextureRect/HBoxContainer/VBoxContainer/Control3/TextureRect"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-grow_vertical = 2
+[node name="Padding" type="Control" parent="MenuAnchor/Background/ButtonContainer/VBoxContainer/ButtonHolder3/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect/HBoxContainer/VBoxContainer/Control3/TextureRect/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -59.0
-offset_top = -60.0
-offset_right = 59.0
-offset_bottom = 60.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_k2nca")
-
-[node name="Label" type="Label" parent="TextureRect/HBoxContainer/VBoxContainer/Control3/TextureRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="QuitButton" parent="MenuAnchor/Background/ButtonContainer/VBoxContainer/ButtonHolder3/HBoxContainer" instance=ExtResource("2_7asoo")]
+unique_name_in_owner = true
+layout_mode = 2
+button_text = "QUIT"

@@ -63,10 +63,11 @@ func _load_scene(task: LoadSceneTask) -> void:
 		push_error("SceneManager: Failed to instantiate scene from path: %s" % entry.path)
 		return
 
-	canvas_layer.add_child(scene_instance)
-	await scene_instance.tree_entered
+	canvas_layer.add_child.call_deferred(scene_instance)
+	await scene_instance.ready
 
 	_scenes[entry.resource_path] = scene_instance
 	
 	task.result = scene_instance
+	task.is_complete = true
 	task.completed.emit(task.result)

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SceneSetEntry" load_steps=6 format=3 uid="uid://ci8gsqe0lcv48"]
+
+[ext_resource type="Script" uid="uid://dycnwq5aitmfg" path="res://core/definitions/scene_entry.gd" id="1_uij0o"]
+[ext_resource type="Resource" uid="uid://cr08q7cljg3j8" path="res://data/core/scenes/test.tres" id="2_0si71"]
+[ext_resource type="Resource" uid="uid://c6nnjgr56uhme" path="res://data/core/scenes/player/player.tres" id="3_6v4ns"]
+[ext_resource type="Script" uid="uid://bw6bt8uu7yj57" path="res://core/definitions/scene_set_entry.gd" id="3_ij7eu"]
+[ext_resource type="Resource" uid="uid://3wdpuaql3yxg" path="res://data/core/scenes/world/entity_spawner.tres" id="4_w7r0p"]
+
+[resource]
+script = ExtResource("3_ij7eu")
+scenes = Array[ExtResource("1_uij0o")]([ExtResource("2_0si71"), ExtResource("3_6v4ns"), ExtResource("4_w7r0p")])
+is_pausable = true
+metadata/_custom_type_script = "uid://bw6bt8uu7yj57"

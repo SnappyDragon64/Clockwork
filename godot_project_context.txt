@@ -1,4 +1,54 @@
 
+=== FILE: export_presets.cfg ===
+
+[preset.0]
+
+name="Web"
+platform="Web"
+runnable=true
+advanced_options=false
+dedicated_server=false
+custom_features=""
+export_filter="all_resources"
+include_filter=""
+exclude_filter=""
+export_path=""
+patches=PackedStringArray()
+encryption_include_filters=""
+encryption_exclude_filters=""
+seed=0
+encrypt_pck=false
+encrypt_directory=false
+script_export_mode=2
+
+[preset.0.options]
+
+custom_template/debug=""
+custom_template/release=""
+variant/extensions_support=false
+variant/thread_support=false
+vram_texture_compression/for_desktop=true
+vram_texture_compression/for_mobile=false
+html/export_icon=true
+html/custom_html_shell=""
+html/head_include=""
+html/canvas_resize_policy=2
+html/focus_canvas_on_start=true
+html/experimental_virtual_keyboard=false
+progressive_web_app/enabled=false
+progressive_web_app/ensure_cross_origin_isolation_headers=true
+progressive_web_app/offline_page=""
+progressive_web_app/display=1
+progressive_web_app/orientation=0
+progressive_web_app/icon_144x144=""
+progressive_web_app/icon_180x180=""
+progressive_web_app/icon_512x512=""
+progressive_web_app/background_color=Color(0, 0, 0, 1)
+
+=== END OF FILE: export_presets.cfg ===
+
+
+
 === FILE: godot_project_context.txt ===
 
 
@@ -64,7 +114,7 @@ config_version=5
 
 [application]
 
-config/name="Qux"
+config/name="Clockwork"
 run/main_scene="uid://eorl60j50wro"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
@@ -78,6 +128,11 @@ SceneSetManager="*res://core/managers/scene_set_manager.gd"
 TransitionManager="*res://core/managers/transition_manager.gd"
 PauseManager="*res://core/managers/pause_manager.gd"
 
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/autoregistry/plugin.cfg")
@@ -89,6 +144,43 @@ pause={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+move_up={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194320,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":-1.0,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":11,"pressure":0.0,"pressed":true,"script":null)
+]
+}
+move_left={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194319,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":-1.0,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":13,"pressure":0.0,"pressed":true,"script":null)
+]
+}
+move_down={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194322,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":1,"axis_value":1.0,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":12,"pressure":0.0,"pressed":true,"script":null)
+]
+}
+move_right={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194321,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"location":0,"echo":false,"script":null)
+, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":0,"axis_value":1.0,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":14,"pressure":0.0,"pressed":true,"script":null)
+]
+}
+
+[rendering]
+
+anti_aliasing/quality/msaa_2d=2
+anti_aliasing/quality/msaa_3d=2
 
 === END OF FILE: project.godot ===
 
@@ -326,6 +418,99 @@ func _trigger_regeneration():
 	print("AutoRegistry: Regeneration complete.")
 
 === END OF FILE: addons\autoregistry\plugin.gd ===
+
+
+
+=== FILE: assets\shaders\toon.gdshader ===
+
+shader_type spatial;
+render_mode diffuse_toon, specular_schlick_ggx, cull_back;
+
+uniform float rim: hint_range(0.0, 1.0, 0.01) = 0.5;
+uniform float rim_threshold: hint_range(0.0, 1.0, 0.01) = 0.5;
+
+uniform float emission: hint_range(0.0, 1.0, 0.1) = 0.0;
+uniform float specular: hint_range(0.0, 1.0, 0.05) = 0.5;
+uniform vec3 specular_color: source_color = vec3(0.5);
+uniform float roughness: hint_range(0.0, 1.0, 0.1) = 1.0;
+
+uniform bool is_normal_symmetric = false;
+uniform float normal_scale: hint_range(0.0, 5.0, 0.1) = 1.0;
+uniform sampler2D normal_map: hint_normal,repeat_enable;
+uniform sampler2D roughness_map: hint_roughness_g,repeat_enable;
+uniform vec4 albedo_color: source_color = vec4(1.0);
+uniform vec4 albedo_color2: source_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform sampler2D diffuse_map: source_color,repeat_enable;
+
+uniform sampler2D specular_map: hint_roughness_r,repeat_enable;
+uniform sampler2D ramp: source_color, repeat_disable;
+
+varying float s1;
+varying vec3 vex;
+
+vec3 get_gradient_color(float position) {
+    return texture(ramp, vec2(position, 0.5)).rgb;
+}
+
+float fresnel(float amount, vec3 normal, vec3 view)
+{
+	return pow((1.0 - clamp(dot(normalize(normal), normalize(view)), 0.0, 1.0)), amount);
+}
+
+vec3 screen(vec3 base, vec3 blend){
+	return 1.0 - (1.0 - base) * (1.0 - blend);
+}
+vec3 soft_light(vec3 base, vec3 blend){
+	vec3 limit = step(0.5, blend);
+	return mix(2.0 * base * blend + base * base * (1.0 - 2.0 * blend), sqrt(base) * (2.0 * blend - 1.0) + (2.0 * base) * (1.0 - blend), limit);
+}
+
+void vertex() {
+	vex = VERTEX;
+}
+
+void fragment() {
+	vec2 uv = UV;
+	NORMAL_MAP = vec3(texture(normal_map, uv).xyz);
+	NORMAL_MAP_DEPTH = normal_scale;
+	if(is_normal_symmetric){
+		vec3 normal_invert_y = NORMAL_MAP;
+		normal_invert_y.y = 1.0 - normal_invert_y.y;
+		if (vex.x < 0.0) {
+			NORMAL_MAP = normal_invert_y;
+		}
+	}
+	ALBEDO = vec3(texture(diffuse_map, uv).rgb) * albedo_color.rgb + albedo_color2.rgb;
+	ROUGHNESS = texture(roughness_map, UV).g * roughness * 0.9;
+	EMISSION = ALBEDO * emission;
+	SPECULAR = texture(specular_map, UV).r * specular;
+	s1 = SPECULAR;
+}
+
+void light(){
+	float NdotL = dot(NORMAL, LIGHT);
+	//rim
+	float basic_fresnel = fresnel(3.0, NORMAL, VIEW);
+	float gradient_rim = step(rim_threshold, basic_fresnel) * basic_fresnel * pow(rim, 0.5);
+	//diffuse
+	float NdotL_clamp = clamp(NdotL, -1.0f, 1.0f);
+	float gradient = mix(0.01f,0.99f, (NdotL_clamp + 1.0)*0.5 * ATTENUATION);
+	vec3 color_ramp = get_gradient_color(max(gradient, gradient_rim));
+	vec3 diffus_light = ALBEDO * color_ramp;
+	vec3 mix_diffus_light = soft_light(diffus_light, LIGHT_COLOR);
+	DIFFUSE_LIGHT = mix(mix_diffus_light, diffus_light, 0.5);
+	//specular
+	float rr = mix(0.99f, 0.01f, ROUGHNESS);
+	vec3 H = normalize(VIEW + LIGHT);
+	float NdotH = clamp(dot(NORMAL, H), 0.0, 1.0) * ATTENUATION;
+	float gradient2 = clamp(pow(NdotH, 16.0/(1.0-rr)), 0.1, 0.99);
+	vec3 color_ramp2 = get_gradient_color(clamp(NdotH * (1.0-ROUGHNESS), 0.01, 0.99));
+	color_ramp2 = mix(vec3(0.0), color_ramp2, gradient2);
+	vec3 specular_color_rgb = min(color_ramp2, specular_color.rgb) * s1;
+	vec3 specular_light = screen(specular_color_rgb, LIGHT_COLOR * rr * color_ramp2);
+	SPECULAR_LIGHT += mix(vec3(0.0), specular_light, s1);
+}
+=== END OF FILE: assets\shaders\toon.gdshader ===
 
 
 
@@ -840,9 +1025,9 @@ func play_outro() -> void:
 
 class_name Events
 
-const DUMMY_EVENT: EventEntry = preload("res://data/core/events/dummy_event.tres")
+const PLAYER_MOVED: EventEntry = preload("res://data/core/events/player/moved.tres")
 
-static var ALL: Array[EventEntry] = [DUMMY_EVENT]
+static var ALL: Array[EventEntry] = [PLAYER_MOVED]
 
 static func get_all() -> Array[EventEntry]:
     return ALL
@@ -884,9 +1069,9 @@ static func get_all() -> Array[LayerEntry]:
 
 class_name Scenes
 
-const MAIN: SceneEntry = preload("res://data/core/scenes/main.tres")
+const TEST: SceneEntry = preload("res://data/core/scenes/test.tres")
 
-static var ALL: Array[SceneEntry] = [MAIN]
+static var ALL: Array[SceneEntry] = [TEST]
 
 static func get_all() -> Array[SceneEntry]:
     return ALL
@@ -904,9 +1089,9 @@ static func get_all() -> Array[SceneEntry]:
 
 class_name SceneSets
 
-const DEFAULT: SceneSetEntry = preload("res://data/core/scene_sets/default.tres")
+const TEST: SceneSetEntry = preload("res://data/core/scene_sets/test.tres")
 
-static var ALL: Array[SceneSetEntry] = [DEFAULT]
+static var ALL: Array[SceneSetEntry] = [TEST]
 
 static func get_all() -> Array[SceneSetEntry]:
     return ALL
@@ -940,6 +1125,7 @@ static func get_all() -> Array[TransitionEntry]:
 class_name LoadSceneTask extends RefCounted
 
 
+@warning_ignore("unused_signal")
 signal completed(result: Node)
 
 
@@ -966,20 +1152,20 @@ func get_scene(scene_entry: SceneEntry) -> Node:
 
 
 
-=== FILE: data\core\events\dummy_event.tres ===
+=== FILE: data\core\events\player\moved.tres ===
 
 [gd_resource type="Resource" script_class="EventEntry" load_steps=2 format=3 uid="uid://b6us0wi62cos4"]
 
-[ext_resource type="Script" uid="uid://cl85ijuvs5gfk" path="res://core/definitions/event_entry.gd" id="1_001oq"]
+[ext_resource type="Script" uid="uid://cl85ijuvs5gfk" path="res://core/definitions/event_entry.gd" id="1_x07w8"]
 
 [resource]
-script = ExtResource("1_001oq")
+script = ExtResource("1_x07w8")
 data_schema = Dictionary[String, int]({
-"flag": 1
+"player_position": 9
 })
 metadata/_custom_type_script = "uid://cl85ijuvs5gfk"
 
-=== END OF FILE: data\core\events\dummy_event.tres ===
+=== END OF FILE: data\core\events\player\moved.tres ===
 
 
 
@@ -1063,37 +1249,38 @@ metadata/_custom_type_script = "uid://bm1rx04nc3pis"
 
 
 
-=== FILE: data\core\scenes\main.tres ===
+=== FILE: data\core\scenes\test.tres ===
 
 [gd_resource type="Resource" script_class="SceneEntry" load_steps=3 format=3 uid="uid://cr08q7cljg3j8"]
 
-[ext_resource type="Script" uid="uid://dycnwq5aitmfg" path="res://core/definitions/scene_entry.gd" id="1_6h1f8"]
-[ext_resource type="Resource" uid="uid://b0km8u6v8nppn" path="res://data/core/layers/debug.tres" id="1_fr1mb"]
+[ext_resource type="Resource" uid="uid://dv7wikmtcpl7u" path="res://data/core/layers/game.tres" id="1_gkbsl"]
+[ext_resource type="Script" uid="uid://dycnwq5aitmfg" path="res://core/definitions/scene_entry.gd" id="2_8fnjt"]
 
 [resource]
-script = ExtResource("1_6h1f8")
-path = "uid://eorl60j50wro"
-layer_entry = ExtResource("1_fr1mb")
+script = ExtResource("2_8fnjt")
+path = "uid://d34ivofjap1eb"
+layer_entry = ExtResource("1_gkbsl")
 metadata/_custom_type_script = "uid://dycnwq5aitmfg"
 
-=== END OF FILE: data\core\scenes\main.tres ===
+=== END OF FILE: data\core\scenes\test.tres ===
 
 
 
-=== FILE: data\core\scene_sets\default.tres ===
+=== FILE: data\core\scene_sets\test.tres ===
 
 [gd_resource type="Resource" script_class="SceneSetEntry" load_steps=4 format=3 uid="uid://ci8gsqe0lcv48"]
 
-[ext_resource type="Script" uid="uid://dycnwq5aitmfg" path="res://core/definitions/scene_entry.gd" id="1_8yp2l"]
-[ext_resource type="Resource" uid="uid://cr08q7cljg3j8" path="res://data/core/scenes/main.tres" id="2_y7ut3"]
-[ext_resource type="Script" uid="uid://bw6bt8uu7yj57" path="res://core/definitions/scene_set_entry.gd" id="3_opv6y"]
+[ext_resource type="Script" uid="uid://dycnwq5aitmfg" path="res://core/definitions/scene_entry.gd" id="1_uij0o"]
+[ext_resource type="Resource" uid="uid://cr08q7cljg3j8" path="res://data/core/scenes/test.tres" id="2_0si71"]
+[ext_resource type="Script" uid="uid://bw6bt8uu7yj57" path="res://core/definitions/scene_set_entry.gd" id="3_ij7eu"]
 
 [resource]
-script = ExtResource("3_opv6y")
-scenes = Array[ExtResource("1_8yp2l")]([ExtResource("2_y7ut3")])
+script = ExtResource("3_ij7eu")
+scenes = Array[ExtResource("1_uij0o")]([ExtResource("2_0si71")])
+is_pausable = false
 metadata/_custom_type_script = "uid://bw6bt8uu7yj57"
 
-=== END OF FILE: data\core\scene_sets\default.tres ===
+=== END OF FILE: data\core\scene_sets\test.tres ===
 
 
 
@@ -1133,5 +1320,122 @@ func _ready():
 script = ExtResource("1_oa506")
 
 === END OF FILE: game\main.tscn ===
+
+
+
+=== FILE: game\gameplay\test.tscn ===
+
+[gd_scene load_steps=7 format=3 uid="uid://d34ivofjap1eb"]
+
+[ext_resource type="PackedScene" uid="uid://bsnho2brgxjr6" path="res://game/gameplay/player/player.tscn" id="1_r21rc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8pp8y"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_r21rc"]
+sky_material = SubResource("ProceduralSkyMaterial_8pp8y")
+
+[sub_resource type="Environment" id="Environment_c2a3t"]
+background_mode = 2
+sky = SubResource("Sky_r21rc")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tnan0"]
+size = Vector2(20, 20)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2k7eg"]
+
+[node name="Test" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c2a3t")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_tnan0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_2k7eg")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 16, 8.5995)
+projection = 1
+size = 16.0
+
+[node name="Player" parent="." instance=ExtResource("1_r21rc")]
+
+=== END OF FILE: game\gameplay\test.tscn ===
+
+
+
+=== FILE: game\gameplay\player\player.gd ===
+
+class_name Player extends CharacterBody3D
+
+
+@export var speed: float = 4.0
+
+=== END OF FILE: game\gameplay\player\player.gd ===
+
+
+
+=== FILE: game\gameplay\player\player.tscn ===
+
+[gd_scene load_steps=5 format=3 uid="uid://bsnho2brgxjr6"]
+
+[ext_resource type="Script" uid="uid://c701senvpk2ds" path="res://game/gameplay/player/player.gd" id="1_ah3ur"]
+[ext_resource type="Script" uid="uid://c4a2jeegcd0wm" path="res://game/gameplay/player/player_input_controller.gd" id="2_jfacm"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_eak53"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ah3ur"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_ah3ur")
+
+[node name="PlayerInputController" type="Node" parent="."]
+script = ExtResource("2_jfacm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_eak53")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_ah3ur")
+
+=== END OF FILE: game\gameplay\player\player.tscn ===
+
+
+
+=== FILE: game\gameplay\player\player_input_controller.gd ===
+
+class_name PlayerInputController extends Node
+
+
+@onready var player: Player = get_owner() as Player
+
+
+func _physics_process(delta: float):
+	var input_vector: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	var direction: Vector3 = Vector3(input_vector.x, 0, input_vector.y).normalized()
+
+	player.velocity.x = direction.x * player.speed
+	player.velocity.z = direction.z * player.speed
+		
+	if not player.is_on_floor():
+		player.velocity.y -= 9.8 * delta
+
+	player.move_and_slide()
+	EventBus.publish(Events.PLAYER_MOVED, { "player_position": player.global_position })
+
+=== END OF FILE: game\gameplay\player\player_input_controller.gd ===
 
 

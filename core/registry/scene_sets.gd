@@ -5,9 +5,9 @@
 
 class_name SceneSets
 
-const DEFAULT: SceneSetEntry = preload("res://data/core/scene_sets/default.tres")
+const TEST: SceneSetEntry = preload("res://data/core/scene_sets/test.tres")
 
-static var ALL: Array[SceneSetEntry] = [DEFAULT]
+static var ALL: Array[SceneSetEntry] = [TEST]
 
 static func get_all() -> Array[SceneSetEntry]:
     return ALL

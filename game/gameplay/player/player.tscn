@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://bsnho2brgxjr6"]
+
+[ext_resource type="Script" uid="uid://c701senvpk2ds" path="res://game/gameplay/player/player.gd" id="1_ah3ur"]
+[ext_resource type="Script" uid="uid://c4a2jeegcd0wm" path="res://game/gameplay/player/input_component.gd" id="2_jfacm"]
+[ext_resource type="Script" uid="uid://bjmgh7i8rw81q" path="res://game/gameplay/player/movement_component.gd" id="3_ekxp3"]
+[ext_resource type="Script" uid="uid://bsmnqncl2qmr8" path="res://game/gameplay/player/loop_component.gd" id="3_evxum"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_eak53"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ah3ur"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_ah3ur")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_eak53")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_ah3ur")
+
+[node name="InputComponent" type="Node" parent="."]
+script = ExtResource("2_jfacm")
+
+[node name="MovementComponent" type="Node" parent="."]
+script = ExtResource("3_ekxp3")
+
+[node name="LoopComponent" type="Node" parent="."]
+script = ExtResource("3_evxum")

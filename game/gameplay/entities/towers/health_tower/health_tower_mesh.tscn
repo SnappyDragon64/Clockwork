@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmf7r8ruh168e"]
+
+[ext_resource type="PackedScene" uid="uid://b3xtjqkxalbjc" path="res://assets/enemies/towers/health_tower.glb" id="1_0ktqy"]
+
+[node name="health_tower" instance=ExtResource("1_0ktqy")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)

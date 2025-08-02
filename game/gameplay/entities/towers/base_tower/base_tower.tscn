@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://0mgtpv3ucdoy"]
+
+[ext_resource type="Script" uid="uid://daunqtn6cs8hj" path="res://game/gameplay/entities/towers/base_tower/base_tower.gd" id="1_4np28"]
+[ext_resource type="PackedScene" uid="uid://3ds6p4hlj64r" path="res://game/gameplay/entities/towers/base_tower/base_tower_mesh.tscn" id="2_4np28"]
+[ext_resource type="Script" uid="uid://d657ej0ut2e7" path="res://game/gameplay/components/loopable_component.gd" id="2_ea658"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4np28"]
+height = 6.0
+radius = 0.6
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lc506"]
+size = Vector3(1, 4.5, 1)
+
+[node name="BaseTower" type="AnimatableBody3D"]
+script = ExtResource("1_4np28")
+height = 4.0
+
+[node name="Mesh" parent="." instance=ExtResource("2_4np28")]
+
+[node name="LoopableComponent" type="Area3D" parent="."]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("2_ea658")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LoopableComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("CylinderShape3D_4np28")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+shape = SubResource("BoxShape3D_lc506")

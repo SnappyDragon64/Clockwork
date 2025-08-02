@@ -6,7 +6,7 @@
 script = ExtResource("1_4iyc7")
 path = "res://game/gameplay/enemies/base_bullet.tscn"
 speed = 5.0
-damage = 10.0
+damage = 1.0
 lifetime = 2.0
 cooldown = 1.0
 rounds = 1

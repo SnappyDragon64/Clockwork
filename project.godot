@@ -96,6 +96,7 @@ sp_ability={
 3d_physics/layer_3="Player Entities"
 3d_physics/layer_4="Enemy"
 3d_physics/layer_5="Enemy Entities"
+3d_physics/layer_6="Loopable"
 
 [physics]
 

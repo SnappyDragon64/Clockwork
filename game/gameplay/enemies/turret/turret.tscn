@@ -1,8 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://d5w70nuiny5m"]
+[gd_scene load_steps=8 format=3 uid="uid://d5w70nuiny5m"]
 
 [ext_resource type="PackedScene" uid="uid://onw08rby5m0d" path="res://game/gameplay/enemies/turret/turret_mesh.tscn" id="1_ctt0p"]
+[ext_resource type="Script" uid="uid://btv2e13p4ifjo" path="res://game/gameplay/enemies/shooter_component.gd" id="2_e3262"]
+[ext_resource type="Script" uid="uid://d657ej0ut2e7" path="res://game/gameplay/components/loopable_component.gd" id="2_shceg"]
+[ext_resource type="Resource" uid="uid://tyvguk1sc1y4" path="res://data/game/shooter_patterns/base_enemy_pattern.tres" id="3_shceg"]
+[ext_resource type="Script" uid="uid://pjqqau73xcwd" path="res://game/gameplay/components/health_component.gd" id="4_gwfdb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_38u6q"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wikox"]
+height = 1.5
 
 [node name="Turret" type="CharacterBody3D"]
 
@@ -12,3 +19,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_38u6q")
+
+[node name="LoopableComponent" type="Area3D" parent="."]
+script = ExtResource("2_shceg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LoopableComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CylinderShape3D_wikox")
+
+[node name="ShooterComponent" type="Node3D" parent="."]
+script = ExtResource("2_e3262")
+pattern = ExtResource("3_shceg")
+metadata/_custom_type_script = "uid://btv2e13p4ifjo"
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_gwfdb")

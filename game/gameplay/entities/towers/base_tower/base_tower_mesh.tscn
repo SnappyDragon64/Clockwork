@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://3ds6p4hlj64r"]
+
+[ext_resource type="PackedScene" uid="uid://k6ywixt0o5xp" path="res://assets/enemies/towers/base_tower.glb" id="1_ie8aq"]
+
+[node name="base_tower" instance=ExtResource("1_ie8aq")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)

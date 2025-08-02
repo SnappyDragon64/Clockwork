@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://c0bdrcgnukgsh"]
 
-[ext_resource type="PackedScene" uid="uid://cdxys76kc0gdn" path="res://assets/enemies/enemy_sphere.glb" id="1_61msn"]
 [ext_resource type="Script" uid="uid://dkb4crivrkpke" path="res://game/gameplay/components/mesh_anchor.gd" id="1_jylkc"]
+[ext_resource type="PackedScene" uid="uid://b4usrewjug6vq" path="res://game/gameplay/enemies/enemy_sphere/sphere.tscn" id="2_5ahaa"]
 [ext_resource type="Script" uid="uid://dovoymatk0481" path="res://game/gameplay/components/animation_component.gd" id="2_ytj8o"]
 [ext_resource type="Script" uid="uid://pjqqau73xcwd" path="res://game/gameplay/components/health_component.gd" id="4_xsfl5"]
 [ext_resource type="Script" uid="uid://btv2e13p4ifjo" path="res://game/gameplay/enemies/shooter_component.gd" id="5_hogbg"]
@@ -28,7 +28,7 @@ collision_mask = 3
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_jylkc")
 
-[node name="Mesh" parent="MeshAnchor" instance=ExtResource("1_61msn")]
+[node name="Mesh" parent="MeshAnchor" instance=ExtResource("2_5ahaa")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.75, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -52,4 +52,9 @@ pattern = ExtResource("6_e3uer")
 script = ExtResource("7_e3uer")
 look_at_player = true
 
+
 [editable path="MeshAnchor/Mesh"]
+[node name="TimeStopComponent" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("8_5ahaa")
+

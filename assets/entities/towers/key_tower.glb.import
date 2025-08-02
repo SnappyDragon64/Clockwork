@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dljnyo1ve5pgh"
-path="res://.godot/imported/key_tower.glb-78d77e46eed6b55c043672fa2c22e698.scn"
+path="res://.godot/imported/key_tower.glb-7a4ce7f6922cc46d740fc57f16bb6623.scn"
 
 [deps]
 
-source_file="res://assets/enemies/towers/key_tower.glb"
-dest_files=["res://.godot/imported/key_tower.glb-78d77e46eed6b55c043672fa2c22e698.scn"]
+source_file="res://assets/entities/towers/key_tower.glb"
+dest_files=["res://.godot/imported/key_tower.glb-7a4ce7f6922cc46d740fc57f16bb6623.scn"]
 
 [params]
 

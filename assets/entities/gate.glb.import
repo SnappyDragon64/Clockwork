@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://k6ywixt0o5xp"
-path="res://.godot/imported/base_tower.glb-c58d08b83680b12ff940c04c35da824b.scn"
+uid="uid://b8qm41k528wvw"
+path="res://.godot/imported/gate.glb-aa717e6201360823b8e10a40577c7c39.scn"
 
 [deps]
 
-source_file="res://assets/enemies/towers/base_tower.glb"
-dest_files=["res://.godot/imported/base_tower.glb-c58d08b83680b12ff940c04c35da824b.scn"]
+source_file="res://assets/entities/gate.glb"
+dest_files=["res://.godot/imported/gate.glb-aa717e6201360823b8e10a40577c7c39.scn"]
 
 [params]
 

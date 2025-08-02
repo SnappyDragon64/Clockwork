@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3p846mge6isw"
-path.s3tc="res://.godot/imported/base_tower_cyloop_texture.png-efd62ffc46484488d4fd7774962d00ec.s3tc.ctex"
+uid="uid://tbrt5imtteep"
+path.s3tc="res://.godot/imported/enemy_tower_enemy_cyloop_texture.png-d903d4c9ef8dd4aae7fc4dcee618f112.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "594842d90fa6dd709fe131dc6edb3e93"
+"md5": "14d3083493a3dba4b87c0bf60b2ffaae"
 }
 
 [deps]
 
-source_file="res://assets/enemies/towers/base_tower_cyloop_texture.png"
-dest_files=["res://.godot/imported/base_tower_cyloop_texture.png-efd62ffc46484488d4fd7774962d00ec.s3tc.ctex"]
+source_file="res://assets/entities/towers/enemy_tower_enemy_cyloop_texture.png"
+dest_files=["res://.godot/imported/enemy_tower_enemy_cyloop_texture.png-d903d4c9ef8dd4aae7fc4dcee618f112.s3tc.ctex"]
 
 [params]
 

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b3xtjqkxalbjc"
-path="res://.godot/imported/health_tower.glb-142f27f9ba0b4b490b413a281f384d8d.scn"
+uid="uid://ccrbr44papgf"
+path="res://.godot/imported/enemy_tower.glb-0ddf52f663a5cd0ed900df2d4330a5db.scn"
 
 [deps]
 
-source_file="res://assets/enemies/towers/health_tower.glb"
-dest_files=["res://.godot/imported/health_tower.glb-142f27f9ba0b4b490b413a281f384d8d.scn"]
+source_file="res://assets/entities/towers/enemy_tower.glb"
+dest_files=["res://.godot/imported/enemy_tower.glb-0ddf52f663a5cd0ed900df2d4330a5db.scn"]
 
 [params]
 

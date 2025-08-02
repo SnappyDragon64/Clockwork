@@ -9,11 +9,12 @@ const SPAWN_ENTITY: EventEntry = preload("res://data/core/events/spawn_entity.tr
 const PLAYER_BULLET_TIME_ENDED: EventEntry = preload("res://data/core/events/player/bullet_time_ended.tres")
 const PLAYER_BULLET_TIME_STARTED: EventEntry = preload("res://data/core/events/player/bullet_time_started.tres")
 const PLAYER_DIED: EventEntry = preload("res://data/core/events/player/died.tres")
+const PLAYER_GAIN_HEALTH: EventEntry = preload("res://data/core/events/player/gain_health.tres")
 const PLAYER_HEALTH_CHANGED: EventEntry = preload("res://data/core/events/player/health_changed.tres")
 const PLAYER_MOVED: EventEntry = preload("res://data/core/events/player/moved.tres")
 const PLAYER_SP_CHANGED: EventEntry = preload("res://data/core/events/player/sp_changed.tres")
 
-static var ALL: Array[EventEntry] = [SPAWN_ENTITY, PLAYER_BULLET_TIME_ENDED, PLAYER_BULLET_TIME_STARTED, PLAYER_DIED, PLAYER_HEALTH_CHANGED, PLAYER_MOVED, PLAYER_SP_CHANGED]
+static var ALL: Array[EventEntry] = [SPAWN_ENTITY, PLAYER_BULLET_TIME_ENDED, PLAYER_BULLET_TIME_STARTED, PLAYER_DIED, PLAYER_GAIN_HEALTH, PLAYER_HEALTH_CHANGED, PLAYER_MOVED, PLAYER_SP_CHANGED]
 
 static func get_all() -> Array[EventEntry]:
     return ALL

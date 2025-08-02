@@ -13,7 +13,6 @@ size = Vector3(1, 4.5, 1)
 
 [node name="EnemyTower" type="AnimatableBody3D"]
 script = ExtResource("1_sif77")
-enemy_path = Array[NodePath]([NodePath(""), NodePath(""), NodePath("")])
 
 [node name="Mesh" parent="." instance=ExtResource("2_sif77")]
 

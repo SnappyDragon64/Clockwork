@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://d5w70nuiny5m"]
+[gd_scene load_steps=9 format=3 uid="uid://d5w70nuiny5m"]
 
 [ext_resource type="PackedScene" uid="uid://onw08rby5m0d" path="res://game/gameplay/enemies/turret/turret_mesh.tscn" id="1_ctt0p"]
+[ext_resource type="Script" uid="uid://clr7efmm32xyt" path="res://game/gameplay/enemies/turret/turret.gd" id="1_gwfdb"]
 [ext_resource type="Script" uid="uid://btv2e13p4ifjo" path="res://game/gameplay/enemies/shooter_component.gd" id="2_e3262"]
 [ext_resource type="Script" uid="uid://d657ej0ut2e7" path="res://game/gameplay/components/loopable_component.gd" id="2_shceg"]
 [ext_resource type="Resource" uid="uid://tyvguk1sc1y4" path="res://data/game/shooter_patterns/base_enemy_pattern.tres" id="3_shceg"]
@@ -12,6 +13,7 @@
 height = 1.5
 
 [node name="Turret" type="CharacterBody3D"]
+script = ExtResource("1_gwfdb")
 
 [node name="turret_mesh" parent="." instance=ExtResource("1_ctt0p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)

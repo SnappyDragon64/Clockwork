@@ -8,7 +8,6 @@ enum State {
 @export var current_state: State = State.REST
 @export var height: float = 3
 @export var time: float = 1
-@export var has_been_activated: bool = false
 
 @onready var loopable_component: LoopableComponent = $LoopableComponent
 

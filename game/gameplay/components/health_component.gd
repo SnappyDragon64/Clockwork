@@ -25,6 +25,8 @@ func _ready() -> void:
 		_iframe_timer.wait_time = 1.5
 		_iframe_timer.timeout.connect(_on_iframe_finished)
 		add_child(_iframe_timer)
+	
+	EventBus.subscribe(Events.PLAYER_GAIN_HEALTH, _on_gain_health)
 
 
 
@@ -53,6 +55,10 @@ func add_health(amount: float) -> void:
 	
 	current_health = min(max_health, current_health + amount)
 	health_changed.emit(current_health, max_health)
+
+
+func _on_gain_health(data: Dictionary) -> void:
+	add_health(data.health_gain)
 
 
 func initiate_iframes():

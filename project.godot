@@ -97,6 +97,12 @@ sp_ability={
 3d_physics/layer_4="Enemy"
 3d_physics/layer_5="Enemy Entities"
 
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
 [rendering]
 
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=3
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=3
 anti_aliasing/quality/msaa_3d=2

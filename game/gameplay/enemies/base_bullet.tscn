@@ -1,15 +1,33 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8oivy5sm13v7"]
+[gd_scene load_steps=8 format=3 uid="uid://b8oivy5sm13v7"]
 
 [ext_resource type="Script" uid="uid://bltnxvnd7bo6v" path="res://game/gameplay/enemies/base_bullet.gd" id="1_xccjp"]
-[ext_resource type="Script" uid="uid://d7wcwirc0t6w" path="res://game/gameplay/components/time_stop_component.gd" id="2_1vf36"]
+[ext_resource type="Shader" uid="uid://ci7q6jm3gsql1" path="res://assets/shaders/toon.gdshader" id="2_1vf36"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v6r4e"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xccjp"]
-albedo_color = Color(0.917586, 0, 0.317073, 1)
+[sub_resource type="Gradient" id="Gradient_nyi8l"]
+offsets = PackedFloat32Array(0, 0.00793651)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5lmop"]
+gradient = SubResource("Gradient_nyi8l")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xypv6"]
+render_priority = 0
+shader = ExtResource("2_1vf36")
+shader_parameter/rim = 0.5
+shader_parameter/rim_threshold = 0.5
+shader_parameter/emission = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/specular_color = Color(0.439495, 0.382964, 1, 1)
+shader_parameter/roughness = 1.0
+shader_parameter/is_normal_symmetric = false
+shader_parameter/normal_scale = 1.0
+shader_parameter/albedo_color = Color(0.90846, 0, 0.261598, 1)
+shader_parameter/albedo_color2 = Color(0, 0, 0, 1)
+shader_parameter/ramp = SubResource("GradientTexture1D_5lmop")
 
 [sub_resource type="SphereMesh" id="SphereMesh_1vf36"]
-material = SubResource("StandardMaterial3D_xccjp")
+material = SubResource("ShaderMaterial_xypv6")
 
 [node name="BaseBullet" type="Area3D"]
 collision_layer = 16
@@ -17,13 +35,9 @@ collision_mask = 3
 script = ExtResource("1_xccjp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, 0, 1, 0)
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 1, 0)
 shape = SubResource("SphereShape3D_v6r4e")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 1, 0)
 mesh = SubResource("SphereMesh_1vf36")
-
-[node name="TimeStopComponent" type="Node" parent="."]
-process_mode = 3
-script = ExtResource("2_1vf36")

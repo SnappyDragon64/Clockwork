@@ -9,6 +9,7 @@ var lifetime_timer: Timer
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 
 var is_dying: bool = false
+var _speed_multiplier: float = 1.0
 
 
 func _ready() -> void: 
@@ -22,13 +23,16 @@ func _ready() -> void:
 	
 	area_entered.connect(_on_hit)
 	body_entered.connect(_on_hit)
+	
+	EventBus.subscribe(Events.PLAYER_BULLET_TIME_STARTED, _on_bullet_time_started)
+	EventBus.subscribe(Events.PLAYER_BULLET_TIME_ENDED, _on_bullet_time_ended)
 
 
 func _physics_process(delta: float) -> void:
 	if is_dying:
 		return
 		
-	position += -transform.basis.z * speed * delta
+	position += -transform.basis.z * speed * _speed_multiplier * delta
 
 
 func _on_hit(node: Node3D) -> void:
@@ -51,3 +55,13 @@ func _on_lifetime_timeout() -> void:
 func _start_death_sequence() -> void:
 	is_dying = true
 	queue_free()
+
+
+func _on_bullet_time_started(data: Dictionary) -> void:
+	_speed_multiplier = data.speed_multiplier
+	lifetime_timer.paused = true
+
+
+func _on_bullet_time_ended(data: Dictionary) -> void:
+	_speed_multiplier = 1.0
+	lifetime_timer.paused = false

@@ -4,5 +4,7 @@
 
 [resource]
 script = ExtResource("1_oisly")
-data_schema = Dictionary[String, int]({})
+data_schema = Dictionary[String, int]({
+"speed_multiplier": 3
+})
 metadata/_custom_type_script = "uid://cl85ijuvs5gfk"

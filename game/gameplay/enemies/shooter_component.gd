@@ -15,6 +15,9 @@ var _fire_rate_timer: Timer
 var _shoot_period: Timer
 var offset_flag: int = 1
 
+var _speed_multiplier: float = 1.0
+var _is_bullet_time: bool = false
+
 
 func _ready() -> void:
 	if not is_instance_valid(pattern):
@@ -45,20 +48,27 @@ func _ready() -> void:
 
 
 func attempt_shoot() -> void:
+	if _is_bullet_time:
+		return
+	
 	if _can_shoot and not _is_dead:
 		_shoot()
 
 
 func _shoot() -> void:
+	if _is_bullet_time:
+		return
+	
 	_can_shoot = false
 	_round_counter = 0
 	_fire_volley()
 
 
 func _fire_volley() -> void:
-	if _is_dead or _round_counter >= pattern.rounds:
+	if _is_dead or _round_counter >= pattern.rounds or _is_bullet_time:
 		_fire_rate_timer.stop()
-		_cooldown_timer.start()
+		if not _is_bullet_time:
+			_cooldown_timer.start()
 		return
 
 	var angle_step = 0.0
@@ -112,13 +122,20 @@ func try_shoot():
 
 
 func _on_shoot_period_timeout() -> void:
-	
 	auto_fire = false
 
 
-func _on_bullet_time_started() -> void:
-	pass
+func _on_bullet_time_started(data: Dictionary) -> void:
+	_speed_multiplier = data.speed_multiplier
+
+	_is_bullet_time = true
+	_cooldown_timer.paused = true
+	_fire_rate_timer.paused = true
 
 
-func _on_bullet_time_ended() -> void:
-	pass
+func _on_bullet_time_ended(data: Dictionary) -> void:
+	_speed_multiplier = 1.0
+
+	_is_bullet_time = false
+	_cooldown_timer.paused = false
+	_fire_rate_timer.paused = false

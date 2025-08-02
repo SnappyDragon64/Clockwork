@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://d34ivofjap1eb"]
+[gd_scene load_steps=11 format=3 uid="uid://d34ivofjap1eb"]
 
+[ext_resource type="Shader" uid="uid://ci7q6jm3gsql1" path="res://assets/shaders/toon.gdshader" id="1_c2a3t"]
 [ext_resource type="PackedScene" uid="uid://c0bdrcgnukgsh" path="res://game/gameplay/enemies/enemy_sphere/enemy_sphere.tscn" id="1_r21rc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8pp8y"]
@@ -15,7 +16,30 @@ sky = SubResource("Sky_r21rc")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="Gradient" id="Gradient_c2a3t"]
+offsets = PackedFloat32Array(0, 0.539683, 0.865079, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.275229, 0.275229, 0.275229, 1, 0.357143, 0.357143, 0.357143, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tnan0"]
+gradient = SubResource("Gradient_c2a3t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2k7eg"]
+render_priority = 0
+shader = ExtResource("1_c2a3t")
+shader_parameter/rim = 0.5
+shader_parameter/rim_threshold = 0.5
+shader_parameter/emission = 0.0
+shader_parameter/specular = 0.5
+shader_parameter/specular_color = Color(1, 1, 1, 1)
+shader_parameter/roughness = 1.0
+shader_parameter/is_normal_symmetric = false
+shader_parameter/normal_scale = 1.0
+shader_parameter/albedo_color = Color(0, 0.738187, 0.813062, 1)
+shader_parameter/albedo_color2 = Color(0, 0, 0, 1)
+shader_parameter/ramp = SubResource("GradientTexture1D_tnan0")
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_tnan0"]
+material = SubResource("ShaderMaterial_2k7eg")
 size = Vector2(20, 20)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_2k7eg"]

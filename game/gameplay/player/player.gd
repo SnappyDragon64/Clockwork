@@ -53,7 +53,7 @@ func _on_sp_changed(current_sp: float, max_sp: float) -> void:
 
 func _on_ability_activated() -> void:
 	print("bullet time active")
-	EventBus.publish(Events.PLAYER_BULLET_TIME_STARTED)
+	EventBus.publish(Events.PLAYER_BULLET_TIME_STARTED, {"speed_multiplier": 0.01})
 
 
 func _on_ability_deactivated() -> void:

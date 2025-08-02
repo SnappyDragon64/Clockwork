@@ -22,6 +22,8 @@ enum MovementType {
 
 var _has_received_position: bool = false
 var path_progress: float = 0.0
+var _speed_multiplier: float = 1
+var _is_bullet_time: bool = false
 
 
 func _ready() -> void:
@@ -30,6 +32,9 @@ func _ready() -> void:
 
 	if movement_type == MovementType.FOLLOW_PATH and not path_node:
 		movement_type = MovementType.STATIONARY
+	
+	EventBus.subscribe(Events.PLAYER_BULLET_TIME_STARTED, _on_bullet_time_started)
+	EventBus.subscribe(Events.PLAYER_BULLET_TIME_ENDED, _on_bullet_time_ended)
 
 
 func _physics_process(delta: float) -> void:
@@ -53,10 +58,11 @@ func _update_direction(data: Dictionary):
 
 func _move_stationary(delta) -> void:
 	enemy_body.velocity = Vector3.ZERO
-	if look_at_player and _has_received_position:
-		enemy_body.look_at(player_position, Vector3.UP)
-	if spin:
-		enemy_body.rotate(Vector3(0, 1, 0), 3*delta/4)
+	if not _is_bullet_time:
+		if look_at_player and _has_received_position:
+			enemy_body.look_at(player_position, Vector3.UP)
+		if spin:
+			enemy_body.rotate(Vector3(0, 1, 0), 3*delta/4)
 
 
 func _move_follow_player():
@@ -65,11 +71,12 @@ func _move_follow_player():
 
 	var target_on_plane = player_position
 	target_on_plane.y = enemy_body.global_position.y
-
-	enemy_body.look_at(target_on_plane, Vector3.UP)
+	
+	if not _is_bullet_time:
+		enemy_body.look_at(target_on_plane, Vector3.UP)
 
 	var distance = enemy_body.global_position.distance_to(target_on_plane)
-	var current_speed = speed
+	var current_speed = speed * _speed_multiplier
 	
 	if distance > stopping_distance:
 		var direction = (target_on_plane - enemy_body.global_position).normalized()
@@ -82,14 +89,15 @@ func _move_follow_path(delta: float):
 	if not path_node:
 		return
 
-	var current_path_speed = speed
+	var current_path_speed = speed * _speed_multiplier
 	path_progress += current_path_speed * delta
 	var next_position = path_node.curve.sample_baked(path_progress)
 	
-	if not look_at_player:
-		enemy_body.look_at(next_position, Vector3.UP)
-	elif _has_received_position:
-		enemy_body.look_at(player_position, Vector3.UP)
+	if not _is_bullet_time:
+		if not look_at_player:
+			enemy_body.look_at(next_position, Vector3.UP)
+		elif _has_received_position:
+			enemy_body.look_at(player_position, Vector3.UP)
 	
 	var direction = (next_position - enemy_body.global_position).normalized()
 	enemy_body.velocity = direction * current_path_speed
@@ -97,3 +105,13 @@ func _move_follow_path(delta: float):
 	var path_length = path_node.curve.get_baked_length()
 	if path_progress >= path_length:
 		path_progress = fmod(path_progress, path_length)
+
+
+func _on_bullet_time_started(data: Dictionary) -> void:
+	_speed_multiplier = data.speed_multiplier
+	_is_bullet_time = true
+
+
+func _on_bullet_time_ended(data: Dictionary) -> void:
+	_speed_multiplier = 1.0
+	_is_bullet_time = false

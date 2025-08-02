@@ -13,6 +13,7 @@ signal damaged()
 var current_health: float
 var invincible: bool = false
 var _iframe_timer
+var _is_bullet_time: bool = false
 
 
 func _ready() -> void:
@@ -24,6 +25,7 @@ func _ready() -> void:
 		_iframe_timer.wait_time = 1.5
 		_iframe_timer.timeout.connect(_on_iframe_finished)
 		add_child(_iframe_timer)
+
 
 
 func take_damage(amount: float) -> void:
@@ -61,3 +63,13 @@ func initiate_iframes():
 func _on_iframe_finished():
 	invincible = false
 	iframes_ended.emit()
+
+
+func _on_bullet_time_started(data: Dictionary) -> void:
+	if not Player:
+		invincible = true
+
+
+func _on_bullet_time_ended(data: Dictionary) -> void:
+	if not Player:
+		invincible = false

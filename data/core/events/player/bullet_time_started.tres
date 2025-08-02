@@ -4,7 +4,5 @@
 
 [resource]
 script = ExtResource("1_oisly")
-data_schema = Dictionary[String, int]({
-"player_position": 9
-})
+data_schema = Dictionary[String, int]({})
 metadata/_custom_type_script = "uid://cl85ijuvs5gfk"

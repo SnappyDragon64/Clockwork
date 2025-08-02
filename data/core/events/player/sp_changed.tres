@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_vm86n")
 data_schema = Dictionary[String, int]({
-"current_sp": 2,
-"max_sp": 2
+"current_sp": 3,
+"max_sp": 3
 })
 metadata/_custom_type_script = "uid://cl85ijuvs5gfk"

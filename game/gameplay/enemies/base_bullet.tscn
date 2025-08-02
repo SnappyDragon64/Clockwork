@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8oivy5sm13v7"]
+[gd_scene load_steps=6 format=3 uid="uid://b8oivy5sm13v7"]
 
 [ext_resource type="Script" uid="uid://bltnxvnd7bo6v" path="res://game/gameplay/enemies/base_bullet.gd" id="1_xccjp"]
+[ext_resource type="Script" uid="uid://d7wcwirc0t6w" path="res://game/gameplay/components/time_stop_component.gd" id="2_1vf36"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v6r4e"]
 
@@ -22,3 +23,7 @@ shape = SubResource("SphereShape3D_v6r4e")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("SphereMesh_1vf36")
+
+[node name="TimeStopComponent" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("2_1vf36")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bsnho2brgxjr6"]
+[gd_scene load_steps=24 format=3 uid="uid://bsnho2brgxjr6"]
 
 [ext_resource type="Script" uid="uid://c701senvpk2ds" path="res://game/gameplay/player/player.gd" id="1_ah3ur"]
 [ext_resource type="Script" uid="uid://c4a2jeegcd0wm" path="res://game/gameplay/player/input_component.gd" id="2_jfacm"]
@@ -8,8 +8,14 @@
 [ext_resource type="Script" uid="uid://dovoymatk0481" path="res://game/gameplay/components/animation_component.gd" id="5_uwejm"]
 [ext_resource type="PackedScene" uid="uid://biw657njqimnr" path="res://game/gameplay/player/clockwork.tscn" id="5_yd8eo"]
 [ext_resource type="Script" uid="uid://pjqqau73xcwd" path="res://game/gameplay/components/health_component.gd" id="6_bgtic"]
+[ext_resource type="Script" uid="uid://ljkfxnqprf53" path="res://game/gameplay/player/graze_component.gd" id="9_r1swm"]
+[ext_resource type="Texture2D" uid="uid://dl6y1oes7dr6k" path="res://assets/player/graze_circle.svg" id="9_yv73l"]
+[ext_resource type="Script" uid="uid://b8spgqg5wte7l" path="res://game/gameplay/player/sp_component.gd" id="11_a4rij"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ah3ur"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_r1swm"]
+radius = 5.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bgtic"]
 animation = &"player/key_rotation"
@@ -77,7 +83,12 @@ shape = SubResource("CapsuleShape3D_ah3ur")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("6_bgtic")
+max_health = 100.0
 is_player = true
+
+[node name="SPComponent" type="Node" parent="."]
+script = ExtResource("11_a4rij")
+ability_duration = 1.0
 
 [node name="InputComponent" type="Node" parent="."]
 script = ExtResource("2_jfacm")
@@ -88,6 +99,19 @@ script = ExtResource("3_ekxp3")
 [node name="LoopComponent" type="Node" parent="."]
 script = ExtResource("3_evxum")
 
+[node name="GrazeComponent" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("9_r1swm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GrazeComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_r1swm")
+
+[node name="Sprite3D" type="Sprite3D" parent="GrazeComponent"]
+transform = Transform3D(0.4, 0, 0, 0, -1.74846e-08, -0.4, 0, 0.4, -1.74846e-08, 0, 0.5, 0)
+texture = ExtResource("9_yv73l")
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../MeshAnchor/Mesh")
 tree_root = SubResource("AnimationNodeStateMachine_a4rij")
@@ -96,5 +120,7 @@ anim_player = NodePath("../MeshAnchor/Mesh/AnimationPlayer")
 parameters/Bullet/TimeScale/scale = 3.0
 "parameters/Idle/Position + Rotation/add_amount" = 1.0
 script = ExtResource("5_uwejm")
+
+[connection signal="area_entered" from="GrazeComponent" to="GrazeComponent" method="_on_area_entered"]
 
 [editable path="MeshAnchor/Mesh"]

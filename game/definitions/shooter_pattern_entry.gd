@@ -4,8 +4,8 @@ extends Resource
 @export_group("Bullet")
 @export_file("*.tscn") var path: String = "res://game/gameplay/enemies/base_bullet.tscn"
 @export var speed: float = 5.0
-@export var damage: float = 10.0
-@export var lifetime: float = 2.0
+@export var damage: float = 1.0
+@export var lifetime: float = 1.0
 
 @export_group("Timing")
 @export var cooldown: float = 1.0

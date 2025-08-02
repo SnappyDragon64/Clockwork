@@ -3,15 +3,12 @@ class_name ShooterComponent extends Node3D
 
 @export var pattern: ShooterPatternEntry
 @export var auto_fire: bool = true
-@export var pause_during_bullet_time: bool = true
 @export var alt_offset: bool = false
 
 var _round_counter: int = 0
 var _bullet_scene: PackedScene
 var _can_shoot: bool = true
 var _is_dead: bool = false
-var _speed_multiplier: float = 1.0
-var _is_paused_by_bullet_time: bool = false
 
 var _cooldown_timer: Timer
 var _fire_rate_timer: Timer
@@ -39,36 +36,29 @@ func _ready() -> void:
 	_fire_rate_timer.wait_time = pattern.rate
 	_fire_rate_timer.timeout.connect(_fire_volley)
 	add_child(_fire_rate_timer)
-
-	EventBus.subscribe(Events.PLAYER_BULLET_TIME_STARTED, _on_bullet_time_started)
-	EventBus.subscribe(Events.PLAYER_BULLET_TIME_ENDED, _on_bullet_time_ended)
 	
 	if auto_fire:
 		_cooldown_timer.start()
+	
+	EventBus.subscribe(Events.PLAYER_BULLET_TIME_STARTED, _on_bullet_time_started)
+	EventBus.subscribe(Events.PLAYER_BULLET_TIME_ENDED, _on_bullet_time_ended)
 
 
 func attempt_shoot() -> void:
-	if _is_paused_by_bullet_time:
-		return
-		
 	if _can_shoot and not _is_dead:
 		_shoot()
 
 
 func _shoot() -> void:
-	if _is_paused_by_bullet_time:
-		return
-		
 	_can_shoot = false
 	_round_counter = 0
 	_fire_volley()
 
 
 func _fire_volley() -> void:
-	if _is_paused_by_bullet_time or _is_dead or _round_counter >= pattern.rounds:
+	if _is_dead or _round_counter >= pattern.rounds:
 		_fire_rate_timer.stop()
-		if not _is_paused_by_bullet_time:
-			_cooldown_timer.start()
+		_cooldown_timer.start()
 		return
 
 	var angle_step = 0.0
@@ -97,7 +87,6 @@ func _fire_volley() -> void:
 		bullet.lifetime = pattern.lifetime
 		bullet.shooter = owner
 		bullet.global_transform = spawn_transform
-		bullet.apply_bullet_time_effects(_speed_multiplier, true)
 		
 		EventBus.publish(Events.SPAWN_ENTITY, { "entity": bullet })
 
@@ -115,25 +104,6 @@ func _on_cooldown_finished() -> void:
 	if auto_fire and not _is_dead:
 		attempt_shoot()
 
-
-func _on_bullet_time_started(data: Dictionary) -> void:
-	_speed_multiplier = data.speed_multiplier
-
-	if pause_during_bullet_time:
-		_is_paused_by_bullet_time = true
-		_cooldown_timer.paused = true
-		_fire_rate_timer.paused = true
-
-
-func _on_bullet_time_ended(_data: Dictionary) -> void:
-	_speed_multiplier = 1.0
-
-	if pause_during_bullet_time:
-		_is_paused_by_bullet_time = false
-		_cooldown_timer.paused = false
-		_fire_rate_timer.paused = false
-
-
 func try_shoot():
 	_shoot_period = $ShootPeriod
 	auto_fire = true
@@ -144,3 +114,11 @@ func try_shoot():
 func _on_shoot_period_timeout() -> void:
 	
 	auto_fire = false
+
+
+func _on_bullet_time_started() -> void:
+	pass
+
+
+func _on_bullet_time_ended() -> void:
+	pass

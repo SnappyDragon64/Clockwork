@@ -22,7 +22,6 @@ enum MovementType {
 
 var _has_received_position: bool = false
 var path_progress: float = 0.0
-var speed_multiplier: float = 1.0
 
 
 func _ready() -> void:
@@ -31,9 +30,6 @@ func _ready() -> void:
 
 	if movement_type == MovementType.FOLLOW_PATH and not path_node:
 		movement_type = MovementType.STATIONARY
-
-	EventBus.subscribe(Events.PLAYER_BULLET_TIME_STARTED, _on_bullet_time_started)
-	EventBus.subscribe(Events.PLAYER_BULLET_TIME_ENDED, _on_bullet_time_ended)
 
 
 func _physics_process(delta: float) -> void:
@@ -55,14 +51,6 @@ func _update_direction(data: Dictionary):
 	_has_received_position = true
 
 
-func _on_bullet_time_started(data: Dictionary) -> void:
-	speed_multiplier = data.get("speed_multiplier", 1.0)
-
-
-func _on_bullet_time_ended(_data: Dictionary) -> void:
-	speed_multiplier = 1.0
-
-
 func _move_stationary(delta) -> void:
 	enemy_body.velocity = Vector3.ZERO
 	if look_at_player and _has_received_position:
@@ -81,7 +69,7 @@ func _move_follow_player():
 	enemy_body.look_at(target_on_plane, Vector3.UP)
 
 	var distance = enemy_body.global_position.distance_to(target_on_plane)
-	var current_speed = speed * speed_multiplier
+	var current_speed = speed
 	
 	if distance > stopping_distance:
 		var direction = (target_on_plane - enemy_body.global_position).normalized()
@@ -94,7 +82,7 @@ func _move_follow_path(delta: float):
 	if not path_node:
 		return
 
-	var current_path_speed = speed * speed_multiplier
+	var current_path_speed = speed
 	path_progress += current_path_speed * delta
 	var next_position = path_node.curve.sample_baked(path_progress)
 	

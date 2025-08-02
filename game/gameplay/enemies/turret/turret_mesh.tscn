@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://onw08rby5m0d"]
+
+[ext_resource type="PackedScene" uid="uid://dgqdpolupfwpl" path="res://assets/enemies/turret.glb" id="1_vw0ht"]
+
+[node name="turret_mesh" instance=ExtResource("1_vw0ht")]

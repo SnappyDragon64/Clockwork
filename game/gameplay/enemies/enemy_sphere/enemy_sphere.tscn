@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=3 uid="uid://c0bdrcgnukgsh"]
+
+[ext_resource type="PackedScene" uid="uid://cdxys76kc0gdn" path="res://assets/enemies/enemy_sphere.glb" id="1_61msn"]
+[ext_resource type="Script" uid="uid://dkb4crivrkpke" path="res://game/gameplay/components/mesh_anchor.gd" id="1_jylkc"]
+[ext_resource type="Script" uid="uid://dovoymatk0481" path="res://game/gameplay/components/animation_component.gd" id="2_ytj8o"]
+[ext_resource type="Script" uid="uid://pjqqau73xcwd" path="res://game/gameplay/components/health_component.gd" id="4_xsfl5"]
+[ext_resource type="Script" uid="uid://btv2e13p4ifjo" path="res://game/gameplay/enemies/shooter_component.gd" id="5_hogbg"]
+[ext_resource type="Resource" uid="uid://tyvguk1sc1y4" path="res://data/game/shooter_patterns/base_enemy_pattern.tres" id="6_e3uer"]
+[ext_resource type="Script" uid="uid://ci2pwdkhsqu5d" path="res://game/gameplay/enemies/enemy_movement_component.gd" id="7_e3uer"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oxo8r"]
+radius = 0.75
+height = 2.15
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jylkc"]
+animation = &"Idle_002"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xsfl5"]
+states/Idle/node = SubResource("AnimationNodeAnimation_jylkc")
+states/Idle/position = Vector2(524, 102)
+states/Start/position = Vector2(239, 100)
+
+[node name="EnemySphere" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 3
+
+[node name="MeshAnchor" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_jylkc")
+
+[node name="Mesh" parent="MeshAnchor" instance=ExtResource("1_61msn")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.75, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_oxo8r")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../MeshAnchor/Mesh")
+tree_root = SubResource("AnimationNodeStateMachine_xsfl5")
+anim_player = NodePath("../MeshAnchor/Mesh/AnimationPlayer")
+script = ExtResource("2_ytj8o")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_xsfl5")
+
+[node name="ShooterComponent" type="Node3D" parent="."]
+script = ExtResource("5_hogbg")
+pattern = ExtResource("6_e3uer")
+
+[node name="EnemyMovementComponent" type="Node3D" parent="."]
+script = ExtResource("7_e3uer")
+look_at_player = true
+
+[editable path="MeshAnchor/Mesh"]

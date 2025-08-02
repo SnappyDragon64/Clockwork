@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://d34ivofjap1eb"]
+[gd_scene load_steps=7 format=3 uid="uid://d34ivofjap1eb"]
+
+[ext_resource type="PackedScene" uid="uid://c0bdrcgnukgsh" path="res://game/gameplay/enemies/enemy_sphere/enemy_sphere.tscn" id="1_r21rc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8pp8y"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -39,3 +41,6 @@ shape = SubResource("WorldBoundaryShape3D_2k7eg")
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 16, 8.5995)
 projection = 1
 size = 16.0
+
+[node name="EnemySphere" parent="." instance=ExtResource("1_r21rc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.90341, 0, 0)

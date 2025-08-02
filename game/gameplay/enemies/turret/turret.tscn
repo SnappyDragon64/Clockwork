@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://d5w70nuiny5m"]
+
+[ext_resource type="PackedScene" uid="uid://onw08rby5m0d" path="res://game/gameplay/enemies/turret/turret_mesh.tscn" id="1_ctt0p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_38u6q"]
+
+[node name="Turret" type="CharacterBody3D"]
+
+[node name="turret_mesh" parent="." instance=ExtResource("1_ctt0p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_38u6q")

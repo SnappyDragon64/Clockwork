@@ -51,10 +51,11 @@ func _execute_transition(target_set: SceneSetEntry) -> void:
 		load_tasks.append(load_task)
 		
 	for task in load_tasks:
-		var loaded_node: Node = await task.completed
+		if not task.is_complete:
+			await task.completed
 		
-		if loaded_node and task.scene_entry:
-			context.scenes[task.scene_entry] = loaded_node
+		if task.result and task.scene_entry:
+			context.scenes[task.scene_entry] = task.result
 	
 	_current_set = target_set
 	PauseManager.set_pausable(_current_set.is_pausable)

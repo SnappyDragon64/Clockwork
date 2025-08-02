@@ -5,9 +5,13 @@
 
 class_name Scenes
 
-const MAIN: SceneEntry = preload("res://data/core/scenes/main.tres")
+const TEST: SceneEntry = preload("res://data/core/scenes/test.tres")
+const PLAYER_LOOP_AREA: SceneEntry = preload("res://data/core/scenes/player/loop_area.tres")
+const PLAYER_LOOP_PATH: SceneEntry = preload("res://data/core/scenes/player/loop_path.tres")
+const PLAYER_PLAYER: SceneEntry = preload("res://data/core/scenes/player/player.tres")
+const WORLD_ENTITY_SPAWNER: SceneEntry = preload("res://data/core/scenes/world/entity_spawner.tres")
 
-static var ALL: Array[SceneEntry] = [MAIN]
+static var ALL: Array[SceneEntry] = [TEST, PLAYER_LOOP_AREA, PLAYER_LOOP_PATH, PLAYER_PLAYER, WORLD_ENTITY_SPAWNER]
 
 static func get_all() -> Array[SceneEntry]:
     return ALL

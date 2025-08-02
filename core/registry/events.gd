@@ -5,9 +5,10 @@
 
 class_name Events
 
-const DUMMY_EVENT: EventEntry = preload("res://data/core/events/dummy_event.tres")
+const SPAWN_ENTITY: EventEntry = preload("res://data/core/events/spawn_entity.tres")
+const PLAYER_MOVED: EventEntry = preload("res://data/core/events/player/moved.tres")
 
-static var ALL: Array[EventEntry] = [DUMMY_EVENT]
+static var ALL: Array[EventEntry] = [SPAWN_ENTITY, PLAYER_MOVED]
 
 static func get_all() -> Array[EventEntry]:
     return ALL

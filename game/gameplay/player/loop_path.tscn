@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtaarst3m50jj"]
+
+[sub_resource type="Curve3D" id="Curve3D_8jyxm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3wuf6"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8jyxm"]
+material = SubResource("StandardMaterial3D_3wuf6")
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="LoopPath" type="Path3D"]
+curve = SubResource("Curve3D_8jyxm")
+
+[node name="PathMesh3D" type="PathMesh3D" parent="." node_paths=PackedStringArray("path_3d")]
+path_3d = NodePath("..")
+mesh = SubResource("BoxMesh_8jyxm")
+surface_0/tile_rotation = Vector3(0, 0, 0)
+surface_0/tile_rotation_order = 2
+surface_0/distribution = 0
+surface_0/alignment = 0
+surface_0/warp_along_curve = true
+surface_0/sample_cubic = false
+surface_0/tilt = true
+surface_0/offset = Vector2(0, 0)
+surface_0/triangle_count = 0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)

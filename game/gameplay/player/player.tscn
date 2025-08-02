@@ -1,24 +1,83 @@
-[gd_scene load_steps=7 format=3 uid="uid://bsnho2brgxjr6"]
+[gd_scene load_steps=20 format=3 uid="uid://bsnho2brgxjr6"]
 
 [ext_resource type="Script" uid="uid://c701senvpk2ds" path="res://game/gameplay/player/player.gd" id="1_ah3ur"]
 [ext_resource type="Script" uid="uid://c4a2jeegcd0wm" path="res://game/gameplay/player/input_component.gd" id="2_jfacm"]
+[ext_resource type="Script" uid="uid://dkb4crivrkpke" path="res://game/gameplay/components/mesh_anchor.gd" id="2_pjyu3"]
 [ext_resource type="Script" uid="uid://bjmgh7i8rw81q" path="res://game/gameplay/player/movement_component.gd" id="3_ekxp3"]
 [ext_resource type="Script" uid="uid://bsmnqncl2qmr8" path="res://game/gameplay/player/loop_component.gd" id="3_evxum"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_eak53"]
+[ext_resource type="Script" uid="uid://dovoymatk0481" path="res://game/gameplay/components/animation_component.gd" id="5_uwejm"]
+[ext_resource type="PackedScene" uid="uid://biw657njqimnr" path="res://game/gameplay/player/clockwork.tscn" id="5_yd8eo"]
+[ext_resource type="Script" uid="uid://pjqqau73xcwd" path="res://game/gameplay/components/health_component.gd" id="6_bgtic"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ah3ur"]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bgtic"]
+animation = &"player/key_rotation"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yv73l"]
+animation = &"player/key_position"
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_uwejm"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_r1swm"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_a4rij"]
+graph_offset = Vector2(-24.5455, 30.9091)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_yv73l")
+nodes/Animation/position = Vector2(400, 340)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_bgtic")
+"nodes/Animation 2/position" = Vector2(400, 140)
+"nodes/Position + Rotation/node" = SubResource("AnimationNodeAdd2_uwejm")
+"nodes/Position + Rotation/position" = Vector2(920, 180)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_r1swm")
+nodes/TimeScale/position = Vector2(680, 140)
+nodes/output/position = Vector2(1200, 280)
+node_connections = [&"Position + Rotation", 0, &"TimeScale", &"Position + Rotation", 1, &"Animation", &"TimeScale", 0, &"Animation 2", &"output", 0, &"Position + Rotation"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_yd8eo"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uwejm"]
+animation = &"player/key_position"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pjyu3"]
+animation = &"player/key_rotation"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yv73l"]
+graph_offset = Vector2(197.276, 60.242)
+nodes/Position/node = SubResource("AnimationNodeAnimation_uwejm")
+nodes/Position/position = Vector2(1100, 240)
+"nodes/Position + Rotation/node" = SubResource("AnimationNodeAdd2_yd8eo")
+"nodes/Position + Rotation/position" = Vector2(1400, 240)
+nodes/Rotation/node = SubResource("AnimationNodeAnimation_pjyu3")
+nodes/Rotation/position = Vector2(1080, 440)
+nodes/output/position = Vector2(1620, 260)
+node_connections = [&"Position + Rotation", 0, &"Position", &"Position + Rotation", 1, &"Rotation", &"output", 0, &"Position + Rotation"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_a4rij"]
+states/Bullet/node = SubResource("AnimationNodeBlendTree_a4rij")
+states/Bullet/position = Vector2(538, 209)
+states/Idle/node = SubResource("AnimationNodeBlendTree_yv73l")
+states/Idle/position = Vector2(538, 100)
+states/Start/position = Vector2(231, 100)
+
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_ah3ur")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_eak53")
+[node name="MeshAnchor" type="Node3D" parent="."]
+script = ExtResource("2_pjyu3")
+
+[node name="Mesh" parent="MeshAnchor" instance=ExtResource("5_yd8eo")]
+transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 0.75, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_ah3ur")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("6_bgtic")
+is_player = true
 
 [node name="InputComponent" type="Node" parent="."]
 script = ExtResource("2_jfacm")
@@ -28,3 +87,14 @@ script = ExtResource("3_ekxp3")
 
 [node name="LoopComponent" type="Node" parent="."]
 script = ExtResource("3_evxum")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../MeshAnchor/Mesh")
+tree_root = SubResource("AnimationNodeStateMachine_a4rij")
+anim_player = NodePath("../MeshAnchor/Mesh/AnimationPlayer")
+"parameters/Bullet/Position + Rotation/add_amount" = 1.0
+parameters/Bullet/TimeScale/scale = 3.0
+"parameters/Idle/Position + Rotation/add_amount" = 1.0
+script = ExtResource("5_uwejm")
+
+[editable path="MeshAnchor/Mesh"]

@@ -5,7 +5,6 @@ class_name MovementComponent extends Node
 
 var direction: Vector3
 
-
 func process_physics(delta: float) -> void:
 	if not player.is_on_floor():
 		player.velocity.y -= 9.8 * delta

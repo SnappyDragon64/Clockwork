@@ -2,5 +2,40 @@ class_name LoopableComponent extends Area3D
 
 signal activated
 
+var is_bullet_time_active := false
+var deferred_signal_flag := false
+
+
+func _ready() -> void:
+	collision_layer = 0
+	collision_mask = 0
+	set_collision_layer_value(6, true)
+	set_collision_mask_value(6, true)
+	
+	area_entered.connect(_on_area_entered)
+	
+	EventBus.subscribe(Events.PLAYER_BULLET_TIME_STARTED, _on_bullet_time_started)
+	EventBus.subscribe(Events.PLAYER_BULLET_TIME_ENDED, _on_bullet_time_ended)
+
+
 func looped() -> void:
 	activated.emit()
+
+
+func _on_area_entered(area: Area3D) -> void:
+	if is_bullet_time_active:
+		deferred_signal_flag = true
+	else:
+		activated.emit()
+
+
+func _on_bullet_time_started(_data: Dictionary) -> void:
+	is_bullet_time_active = true
+
+
+func _on_bullet_time_ended(_data: Dictionary) -> void:
+	is_bullet_time_active = false
+	
+	if deferred_signal_flag:
+		deferred_signal_flag = false
+		activated.emit()

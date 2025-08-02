@@ -1,4 +1,4 @@
-extends Area3D
+class_name LoopArea extends Area3D
 
 
 func set_polygon(polygon: PackedVector2Array):

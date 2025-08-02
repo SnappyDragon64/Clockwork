@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://dmqtsfwpncfwu"]
+
+[ext_resource type="PackedScene" uid="uid://bsnho2brgxjr6" path="res://game/gameplay/player/player.tscn" id="1_r21rc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r21rc"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_c2a3t"]
+sky_material = SubResource("ProceduralSkyMaterial_r21rc")
+
+[sub_resource type="Environment" id="Environment_tnan0"]
+background_mode = 2
+sky = SubResource("Sky_c2a3t")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u88os"]
+size = Vector2(20, 20)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_l1rq1"]
+
+[node name="Test" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, -1.51421e-07, 8.74228e-08, 0, 0.5, 0.866025, -1.74846e-07, -0.866025, 0.5, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tnan0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_u88os")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_l1rq1")
+
+[node name="Player" parent="." instance=ExtResource("1_r21rc")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 8, 10)
+projection = 1
+size = 16.0
+far = 100.0

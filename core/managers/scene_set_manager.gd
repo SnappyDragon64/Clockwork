@@ -40,7 +40,10 @@ func _execute_transition(target_set: SceneSetEntry) -> void:
 	if _current_set:
 		await TransitionManager.play_intro()
 		for scene_entry in _current_set.scenes:
+			var scene = SceneManager.get_scene(scene_entry)
 			SceneManager.unload_scene(scene_entry)
+			await scene.tree_exited
+	
 	
 	var context = SceneSetContext.new()
 	context.entry = target_set

@@ -1,7 +1,7 @@
 class_name LoopComponent extends Node
 
 
-signal loop_completed(points: PackedVector3Array)
+signal loop_completed(points: PackedVector2Array)
 
 @export var min_points_for_loop: int = 4
 @export var min_loop_detection_distance: float = 0.5
@@ -20,8 +20,13 @@ var detected_loops_buffer: Array
 
 
 @onready var player: Player = get_owner() as Player
-var loop_path_scene: PackedScene
+
+var loop_path_scene: PackedScene = preload(Scenes.PLAYER_LOOP_PATH.path)
+var loop_area_scene: PackedScene = preload(Scenes.PLAYER_LOOP_AREA.path)
+
 var loop_path: Path3D
+var loop_area: Area3D
+
 
 func _ready() -> void:
 	sample_timer = Timer.new()
@@ -29,14 +34,16 @@ func _ready() -> void:
 	sample_timer.one_shot = false
 	sample_timer.timeout.connect(_on_sample_timer_timeout)
 	add_child(sample_timer)
-
-	loop_path_scene = preload(Scenes.PLAYER_LOOP_PATH.path)
+	
 	SceneSetManager.scene_set_initialized.connect(_on_scene_set_initialized)
 
 
-func _on_scene_set_initialized(_context: SceneSetContext) -> void:
+func _on_scene_set_initialized(_context: SceneSetContext):
 	loop_path = loop_path_scene.instantiate()
+	loop_area = loop_area_scene.instantiate()
+	
 	EventBus.publish(Events.SPAWN_ENTITY, { "entity": loop_path })
+	EventBus.publish(Events.SPAWN_ENTITY, { "entity": loop_area })
 
 
 func _process(delta: float) -> void:
@@ -115,35 +122,36 @@ func _handle_loop_completion(type: LoopType, intersection_index: int = -1, inter
 		current_state = State.IDLE
 		sample_timer.stop()
 
-		var loop_points_3d: PackedVector3Array
+		var loop_points_2d: PackedVector2Array
 
 		match type:
 			LoopType.PROXIMITY_CLOSURE:
-				loop_points_3d = points_buffer_3d.duplicate()
-				if not loop_points_3d.is_empty() and loop_points_3d[-1] != loop_points_3d[0]:
-					loop_points_3d.append(loop_points_3d[0])
-				print("Loop Detected by Proximity! Points count: %d" % loop_points_3d.size())
+				loop_points_2d = points_buffer_2d.duplicate()
+				if not loop_points_2d.is_empty() and loop_points_2d[-1] != loop_points_2d[0]:
+					loop_points_2d.append(loop_points_2d[0])
+				print("Loop Detected by Proximity! Points count: %d" % loop_points_2d.size())
 
 			LoopType.SELF_INTERSECTION:
 				if intersection_index == -1:
 					print("Error: Self-intersection loop detected without index.")
-					loop_points_3d = points_buffer_3d.duplicate()
+					loop_points_2d = points_buffer_2d.duplicate()
 					return
 
-				for i in range(intersection_index, points_buffer_3d.size() - 1):
-					loop_points_3d.append(points_buffer_3d[i])
+				for i in range(intersection_index, points_buffer_2d.size() - 1):
+					loop_points_2d.append(points_buffer_2d[i])
 
-				var y_avg = (points_buffer_3d[intersection_index].y + points_buffer_3d[intersection_index + 1].y +
-							 points_buffer_3d[-2].y + points_buffer_3d[-1].y) / 4.0
-				loop_points_3d.append(Vector3(intersection_point_2d.x, y_avg, intersection_point_2d.y))
+				#var y_avg = (points_buffer_2d[intersection_index].y + points_buffer_2d[intersection_index + 1].y +
+							 #points_buffer_2d[-2].y + points_buffer_2d[-1].y) / 4.0
+				loop_points_2d.append(Vector2(intersection_point_2d.x, intersection_point_2d.y))
 
-				if not loop_points_3d.is_empty() and loop_points_3d[-1] != loop_points_3d[0]:
-					loop_points_3d.append(loop_points_3d[0])
+				if not loop_points_2d.is_empty() and loop_points_2d[-1] != loop_points_2d[0]:
+					loop_points_2d.append(loop_points_2d[0])
 
-				print("Loop Detected by Self-Intersection! Points count: %d" % loop_points_3d.size())
+				print("Loop Detected by Self-Intersection! Points count: %d" % loop_points_2d.size())
 
-		emit_signal("loop_completed", loop_points_3d)
-		detected_loops_buffer.append(loop_points_3d)
+		loop_completed.emit(loop_points_2d)
+		loop_area.set_polygon(loop_points_2d)
+		detected_loops_buffer.append(loop_points_2d)
 		points_buffer_3d.clear()
 		points_buffer_2d.clear()
 		if loop_path and loop_path.curve:

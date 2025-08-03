@@ -80,6 +80,7 @@ collision_layer = 2
 collision_mask = 201
 script = ExtResource("1_ah3ur")
 speed = 6.5
+sp_per_graze = 2
 
 [node name="MeshAnchor" type="Node3D" parent="."]
 script = ExtResource("2_pjyu3")
@@ -88,19 +89,19 @@ script = ExtResource("2_pjyu3")
 transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 0.75, 0)
 
 [node name="Sphere" parent="MeshAnchor/Mesh" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0536291, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.197219, 0)
 
 [node name="Cylinder_004" parent="MeshAnchor/Mesh" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0536291, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.197219, 0)
 
 [node name="Cylinder_002" parent="MeshAnchor/Mesh" index="2"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.0536291, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.197219, 0)
 
 [node name="Cylinder" parent="MeshAnchor/Mesh" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0536291, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.197219, 0)
 
 [node name="Cube" parent="MeshAnchor/Mesh" index="4"]
-transform = Transform3D(0.742092, 0, -0.670297, 0, 1, 0, 0.670297, 0, 0.742092, 0, 0.0536291, 0)
+transform = Transform3D(-0.826868, 0, -0.562394, 0, 1, 0, 0.562394, 0, -0.826868, 0, 0.197219, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -108,11 +109,11 @@ shape = SubResource("CapsuleShape3D_ah3ur")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("6_bgtic")
-max_health = 100.0
 is_player = true
 
 [node name="SPComponent" type="Node" parent="."]
 script = ExtResource("11_a4rij")
+ability_duration = 3.0
 
 [node name="InputComponent" type="Node" parent="."]
 script = ExtResource("2_jfacm")

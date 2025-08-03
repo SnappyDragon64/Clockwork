@@ -9,8 +9,9 @@ var deferred_signal_flag := false
 func _ready() -> void:
 	collision_layer = 0
 	collision_mask = 0
-	set_collision_layer_value(6, true)
+	monitorable = true
 	set_collision_mask_value(6, true)
+	monitoring = true
 	
 	area_entered.connect(_on_area_entered)
 	

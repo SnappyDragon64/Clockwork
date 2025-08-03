@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bsnho2brgxjr6"]
+[gd_scene load_steps=27 format=3 uid="uid://bsnho2brgxjr6"]
 
 [ext_resource type="Script" uid="uid://c701senvpk2ds" path="res://game/gameplay/player/player.gd" id="1_ah3ur"]
 [ext_resource type="Script" uid="uid://c4a2jeegcd0wm" path="res://game/gameplay/player/input_component.gd" id="2_jfacm"]
@@ -15,67 +15,90 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ah3ur"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r1swm"]
-radius = 5.0
+radius = 2.0
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bgtic"]
-animation = &"player/key_rotation"
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_a4rij"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yv73l"]
-animation = &"player/key_position"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wrf8g"]
+animation = &"player/position"
 
-[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_uwejm"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ltaj"]
+animation = &"player/rotation"
 
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_r1swm"]
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_y6gb0"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_a4rij"]
-graph_offset = Vector2(-24.5455, 30.9091)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_yv73l")
-nodes/Animation/position = Vector2(400, 340)
-"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_bgtic")
-"nodes/Animation 2/position" = Vector2(400, 140)
-"nodes/Position + Rotation/node" = SubResource("AnimationNodeAdd2_uwejm")
-"nodes/Position + Rotation/position" = Vector2(920, 180)
-nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_r1swm")
-nodes/TimeScale/position = Vector2(680, 140)
-nodes/output/position = Vector2(1200, 280)
-node_connections = [&"Position + Rotation", 0, &"TimeScale", &"Position + Rotation", 1, &"Animation", &"TimeScale", 0, &"Animation 2", &"output", 0, &"Position + Rotation"]
+graph_offset = Vector2(-32.52, 42.4609)
+nodes/Add2/node = SubResource("AnimationNodeAdd2_a4rij")
+nodes/Add2/position = Vector2(780, 80)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_5ltaj")
+nodes/Animation/position = Vector2(520, 80)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_wrf8g")
+"nodes/Animation 2/position" = Vector2(540, 240)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_y6gb0")
+nodes/TimeScale/position = Vector2(960, 80)
+nodes/output/position = Vector2(1160, 140)
+node_connections = [&"Add2", 0, &"Animation", &"Add2", 1, &"Animation 2", &"TimeScale", 0, &"Add2", &"output", 0, &"TimeScale"]
 
-[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_yd8eo"]
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_wrf8g"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uwejm"]
-animation = &"player/key_position"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f2xvk"]
+animation = &"player/rotation"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pjyu3"]
-animation = &"player/key_rotation"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8s2f6"]
+animation = &"player/position"
 
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_yv73l"]
-graph_offset = Vector2(197.276, 60.242)
-nodes/Position/node = SubResource("AnimationNodeAnimation_uwejm")
-nodes/Position/position = Vector2(1100, 240)
-"nodes/Position + Rotation/node" = SubResource("AnimationNodeAdd2_yd8eo")
-"nodes/Position + Rotation/position" = Vector2(1400, 240)
-nodes/Rotation/node = SubResource("AnimationNodeAnimation_pjyu3")
-nodes/Rotation/position = Vector2(1080, 440)
-nodes/output/position = Vector2(1620, 260)
-node_connections = [&"Position + Rotation", 0, &"Position", &"Position + Rotation", 1, &"Rotation", &"output", 0, &"Position + Rotation"]
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5ltaj"]
+nodes/Add2/node = SubResource("AnimationNodeAdd2_wrf8g")
+nodes/Add2/position = Vector2(725.395, 123.783)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_8s2f6")
+nodes/Animation/position = Vector2(480, 60)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_f2xvk")
+"nodes/Animation 2/position" = Vector2(500, 200)
+nodes/output/position = Vector2(1000, 120)
+node_connections = [&"Add2", 0, &"Animation", &"Add2", 1, &"Animation 2", &"output", 0, &"Add2"]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_a4rij"]
-states/Bullet/node = SubResource("AnimationNodeBlendTree_a4rij")
-states/Bullet/position = Vector2(538, 209)
-states/Idle/node = SubResource("AnimationNodeBlendTree_yv73l")
-states/Idle/position = Vector2(538, 100)
-states/Start/position = Vector2(231, 100)
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_751ie"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dvjhc"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_38af2"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_y6gb0"]
+states/BulletTime/node = SubResource("AnimationNodeBlendTree_a4rij")
+states/BulletTime/position = Vector2(577, 173)
+states/Default/node = SubResource("AnimationNodeBlendTree_5ltaj")
+states/Default/position = Vector2(562, 80)
+states/Start/position = Vector2(278, 100)
+transitions = ["Start", "Default", SubResource("AnimationNodeStateMachineTransition_751ie"), "Default", "BulletTime", SubResource("AnimationNodeStateMachineTransition_dvjhc"), "BulletTime", "Default", SubResource("AnimationNodeStateMachineTransition_38af2")]
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_ah3ur")
+speed = 5.0
 
 [node name="MeshAnchor" type="Node3D" parent="."]
 script = ExtResource("2_pjyu3")
 
 [node name="Mesh" parent="MeshAnchor" instance=ExtResource("5_yd8eo")]
 transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 0.75, 0)
+
+[node name="Sphere" parent="MeshAnchor/Mesh" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.190759, 0)
+
+[node name="Cylinder_004" parent="MeshAnchor/Mesh" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.190759, 0)
+
+[node name="Cylinder_002" parent="MeshAnchor/Mesh" index="2"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.190759, 0)
+
+[node name="Cylinder" parent="MeshAnchor/Mesh" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.190759, 0)
+
+[node name="Cube" parent="MeshAnchor/Mesh" index="4"]
+transform = Transform3D(-0.913697, 0, -0.406396, 0, 1, 0, 0.406396, 0, -0.913697, 0, 0.190759, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -88,7 +111,6 @@ is_player = true
 
 [node name="SPComponent" type="Node" parent="."]
 script = ExtResource("11_a4rij")
-ability_duration = 1.0
 
 [node name="InputComponent" type="Node" parent="."]
 script = ExtResource("2_jfacm")
@@ -114,12 +136,13 @@ texture = ExtResource("9_yv73l")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../MeshAnchor/Mesh")
-tree_root = SubResource("AnimationNodeStateMachine_a4rij")
+tree_root = SubResource("AnimationNodeStateMachine_y6gb0")
 anim_player = NodePath("../MeshAnchor/Mesh/AnimationPlayer")
-"parameters/Bullet/Position + Rotation/add_amount" = 1.0
-parameters/Bullet/TimeScale/scale = 3.0
-"parameters/Idle/Position + Rotation/add_amount" = 1.0
+parameters/BulletTime/Add2/add_amount = 1.0
+parameters/BulletTime/TimeScale/scale = 3.0
+parameters/Default/Add2/add_amount = 1.0
 script = ExtResource("5_uwejm")
+_is_player = true
 
 [connection signal="area_entered" from="GrazeComponent" to="GrazeComponent" method="_on_area_entered"]
 

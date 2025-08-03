@@ -48,16 +48,14 @@ func _on_scene_set_initialized(_context: SceneSetContext):
 
 func _process(delta: float) -> void:
 	if current_state == State.DRAWING and not loop_detected_flag:
-		_check_current_segment_for_loop()
+		_update_realtime_loop_detection()
 
 
 func _on_loop_started() -> void:
+	EventBus.publish(Events.PLAYER_LOOPING_STARTED)
 	if current_state == State.IDLE:
 		current_state = State.DRAWING
-		points_buffer_3d.clear()
-		points_buffer_2d.clear()
-		if loop_path and loop_path.curve:
-			loop_path.curve.clear_points()
+		_clear_path()
 		loop_detected_flag = false
 
 		var first_point_3d = _get_ground_position()
@@ -72,27 +70,16 @@ func _on_loop_started() -> void:
 
 
 func _on_loop_stopped() -> void:
+	EventBus.publish(Events.PLAYER_LOOPING_ENDED)
 	if current_state == State.DRAWING:
 		current_state = State.IDLE
 
 		if sample_timer:
 			sample_timer.stop()
-
+		
 		if not loop_detected_flag:
-			if points_buffer_3d.size() >= min_points_for_loop:
-				var first_point_2d = points_buffer_2d[0]
-				var last_point_2d = points_buffer_2d[-1]
-
-				if first_point_2d.distance_to(last_point_2d) < min_loop_detection_distance:
-					print("Loop closed by proximity at stop! (No real-time detection)")
-					_handle_loop_completion(LoopType.PROXIMITY_CLOSURE)
-
-		points_buffer_3d.clear()
-		points_buffer_2d.clear()
-		if loop_path and loop_path.curve:
-			loop_path.curve.clear_points()
-		print("Detected loops flushed. Count: %d" % detected_loops_buffer.size())
-		detected_loops_buffer.clear()
+			print("Looping stopped without forming a loop. Clearing path.")
+			_clear_path()
 
 
 func _on_sample_timer_timeout() -> void:
@@ -106,7 +93,38 @@ func _on_sample_timer_timeout() -> void:
 				if loop_path and loop_path.curve:
 					loop_path.curve.add_point(current_point_3d)
 
-				_check_for_incremental_loop_on_sample()
+
+func _update_realtime_loop_detection() -> void:
+	if points_buffer_2d.size() < min_points_for_loop:
+		return
+
+	var current_player_pos_2d = Vector2(player.global_position.x, player.global_position.z)
+	var newest_segment_p1 = points_buffer_2d[-1]
+	var newest_segment_p2 = current_player_pos_2d
+
+	# 1. Check for 'P' Shape (Self-Intersection)
+	for i in range(points_buffer_2d.size() - 2):
+		var old_segment_p1 = points_buffer_2d[i]
+		var old_segment_p2 = points_buffer_2d[i + 1]
+
+		var intersection_point = Geometry2D.segment_intersects_segment(newest_segment_p1, newest_segment_p2, old_segment_p1, old_segment_p2)
+
+		if intersection_point != null:
+			print("Loop detected by real-time self-intersection!")
+			var loop_polygon = PackedVector2Array([intersection_point])
+			loop_polygon.append_array(points_buffer_2d.slice(i + 1))
+			loop_polygon.append(current_player_pos_2d)
+			_handle_loop_completion(loop_polygon)
+			return
+
+	# 2. Check for 'O' Shape (Proximity to Start)
+	var first_point_2d = points_buffer_2d[0]
+	if first_point_2d.distance_to(current_player_pos_2d) < min_loop_detection_distance:
+		print("Loop detected by real-time proximity!")
+		var loop_polygon = points_buffer_2d.duplicate()
+		loop_polygon.append(current_player_pos_2d)
+		_handle_loop_completion(loop_polygon)
+		return
 
 
 func _get_ground_position() -> Vector3:
@@ -116,96 +134,23 @@ func _get_ground_position() -> Vector3:
 enum LoopType { PROXIMITY_CLOSURE, SELF_INTERSECTION }
 
 
-func _handle_loop_completion(type: LoopType, intersection_index: int = -1, intersection_point_2d: Vector2 = Vector2()) -> void:
-	if not loop_detected_flag:
-		loop_detected_flag = true
-		current_state = State.IDLE
-		sample_timer.stop()
+func _handle_loop_completion(loop_polygon_2d: PackedVector2Array) -> void:
+	if loop_detected_flag: return
+	loop_detected_flag = true
+	current_state = State.IDLE
+	sample_timer.stop()
 
-		var loop_points_2d: PackedVector2Array
+	print("Loop Completed! Polygon has %d points." % loop_polygon_2d.size())
 
-		match type:
-			LoopType.PROXIMITY_CLOSURE:
-				loop_points_2d = points_buffer_2d.duplicate()
-				if not loop_points_2d.is_empty() and loop_points_2d[-1] != loop_points_2d[0]:
-					loop_points_2d.append(loop_points_2d[0])
-				print("Loop Detected by Proximity! Points count: %d" % loop_points_2d.size())
+	loop_completed.emit(loop_polygon_2d)
+	loop_area.set_polygon(loop_polygon_2d)
+	detected_loops_buffer.append(loop_polygon_2d)
 
-			LoopType.SELF_INTERSECTION:
-				if intersection_index == -1:
-					print("Error: Self-intersection loop detected without index.")
-					loop_points_2d = points_buffer_2d.duplicate()
-					return
-
-				for i in range(intersection_index, points_buffer_2d.size() - 1):
-					loop_points_2d.append(points_buffer_2d[i])
-
-				#var y_avg = (points_buffer_2d[intersection_index].y + points_buffer_2d[intersection_index + 1].y +
-							 #points_buffer_2d[-2].y + points_buffer_2d[-1].y) / 4.0
-				loop_points_2d.append(Vector2(intersection_point_2d.x, intersection_point_2d.y))
-
-				if not loop_points_2d.is_empty() and loop_points_2d[-1] != loop_points_2d[0]:
-					loop_points_2d.append(loop_points_2d[0])
-
-				print("Loop Detected by Self-Intersection! Points count: %d" % loop_points_2d.size())
-
-		loop_completed.emit(loop_points_2d)
-		loop_area.set_polygon(loop_points_2d)
-		detected_loops_buffer.append(loop_points_2d)
-		points_buffer_3d.clear()
-		points_buffer_2d.clear()
-		if loop_path and loop_path.curve:
-			loop_path.curve.clear_points()
+	_clear_path()
 
 
-func _check_current_segment_for_loop() -> void:
-	if points_buffer_3d.size() < min_points_for_loop - 1:
-		return
-
-	var current_player_pos_3d = _get_ground_position()
-	var current_player_pos_2d = Vector2(current_player_pos_3d.x, current_player_pos_3d.z)
-	var last_sampled_point_2d = points_buffer_2d[-1]
-
-	var first_point_2d = points_buffer_2d[0]
-	if first_point_2d.distance_to(current_player_pos_2d) < min_loop_detection_distance:
-		print("Loop detected by real-time proximity!")
-		_handle_loop_completion(LoopType.PROXIMITY_CLOSURE)
-		return
-
-	var current_segment_p1 = last_sampled_point_2d
-	var current_segment_p2 = current_player_pos_2d
-
-	for i in range(points_buffer_2d.size() - 1):
-		var old_segment_p1 = points_buffer_2d[i]
-		var old_segment_p2 = points_buffer_2d[i+1]
-
-		if i + 1 == points_buffer_2d.size() - 1:
-			continue
-
-		var intersection_result = Geometry2D.segment_intersects_segment(current_segment_p1, current_segment_p2, old_segment_p1, old_segment_p2)
-		if intersection_result != null:
-			print("Loop detected by real-time self-intersection!")
-			_handle_loop_completion(LoopType.SELF_INTERSECTION, i, intersection_result)
-			return
-
-
-func _check_for_incremental_loop_on_sample() -> void:
-	if points_buffer_3d.size() < min_points_for_loop:
-		return
-
-	var n = points_buffer_3d.size()
-	if n < 2:
-		return
-
-	var new_sampled_segment_p1 = points_buffer_2d[-2]
-	var new_sampled_segment_p2 = points_buffer_2d[-1]
-
-	for i in range(n - 3):
-		var old_segment_p1 = points_buffer_2d[i]
-		var old_segment_p2 = points_buffer_2d[i+1]
-
-		var intersection_result = Geometry2D.segment_intersects_segment(new_sampled_segment_p1, new_sampled_segment_p2, old_segment_p1, old_segment_p2)
-		if intersection_result != null:
-			print("Loop detected by self-intersection from new sample!")
-			_handle_loop_completion(LoopType.SELF_INTERSECTION, i, intersection_result)
-			return
+func _clear_path() -> void:
+	points_buffer_3d.clear()
+	points_buffer_2d.clear()
+	if loop_path and loop_path.curve:
+		loop_path.curve.clear_points()

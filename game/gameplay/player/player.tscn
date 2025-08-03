@@ -89,19 +89,19 @@ script = ExtResource("2_pjyu3")
 transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 0.75, 0)
 
 [node name="Sphere" parent="MeshAnchor/Mesh" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.197219, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.111134, 0)
 
 [node name="Cylinder_004" parent="MeshAnchor/Mesh" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.197219, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.111134, 0)
 
 [node name="Cylinder_002" parent="MeshAnchor/Mesh" index="2"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.197219, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.111134, 0)
 
 [node name="Cylinder" parent="MeshAnchor/Mesh" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.197219, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.111134, 0)
 
 [node name="Cube" parent="MeshAnchor/Mesh" index="4"]
-transform = Transform3D(-0.826868, 0, -0.562394, 0, 1, 0, 0.562394, 0, -0.826868, 0, 0.197219, 0)
+transform = Transform3D(-0.164498, 0, 0.986376, 0, 1, 0, -0.986376, 0, -0.164498, 0, 0.111111, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

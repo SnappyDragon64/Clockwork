@@ -7,8 +7,8 @@
 [ext_resource type="Script" uid="uid://btv2e13p4ifjo" path="res://game/gameplay/enemies/shooter_component.gd" id="5_kjo5m"]
 [ext_resource type="Resource" uid="uid://ch5xn28srm3c8" path="res://data/game/shooter_patterns/red_enemy_pattern.tres" id="6_fm4qq"]
 [ext_resource type="Script" uid="uid://d657ej0ut2e7" path="res://game/gameplay/components/loopable_component.gd" id="7_pc7of"]
-[ext_resource type="Script" uid="uid://ci2pwdkhsqu5d" path="res://game/gameplay/enemies/enemy_movement_component.gd" id="8_n5ha7"]
 [ext_resource type="Script" uid="uid://dovoymatk0481" path="res://game/gameplay/components/animation_component.gd" id="9_bio38"]
+[ext_resource type="Script" uid="uid://bc73a7lf0roe6" path="res://game/gameplay/enemies/enemy_sphere/lime/lime_enemy_movement_controller.gd" id="9_fm4qq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_61msn"]
 radius = 0.75
@@ -68,17 +68,14 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1, 
 shape = SubResource("CapsuleShape3D_fm4qq")
 debug_color = Color(0.843285, 0.00105868, 0.915671, 0.42)
 
-[node name="EnemyMovementComponent" type="Node3D" parent="." node_paths=PackedStringArray("path_node")]
-script = ExtResource("8_n5ha7")
-look_at_player = true
-movement_type = 2
-speed = 2.0
-path_node = NodePath("../Path3D")
-metadata/_custom_type_script = "uid://ci2pwdkhsqu5d"
-
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_hot3j")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_2xvkl")
 script = ExtResource("9_bio38")
+
+[node name="EnemyMovementController" type="Node3D" parent="."]
+script = ExtResource("9_fm4qq")
+look_at_player = true
+speed = 6.0

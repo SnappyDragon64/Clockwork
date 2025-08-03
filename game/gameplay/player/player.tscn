@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bsnho2brgxjr6"]
+[gd_scene load_steps=28 format=3 uid="uid://bsnho2brgxjr6"]
 
 [ext_resource type="Script" uid="uid://c701senvpk2ds" path="res://game/gameplay/player/player.gd" id="1_ah3ur"]
 [ext_resource type="Script" uid="uid://c4a2jeegcd0wm" path="res://game/gameplay/player/input_component.gd" id="2_jfacm"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://b8spgqg5wte7l" path="res://game/gameplay/player/sp_component.gd" id="11_a4rij"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ah3ur"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_a4rij"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r1swm"]
 radius = 2.0
@@ -86,19 +88,19 @@ script = ExtResource("2_pjyu3")
 transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 0.75, 0)
 
 [node name="Sphere" parent="MeshAnchor/Mesh" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.190947, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.267894, 0)
 
 [node name="Cylinder_004" parent="MeshAnchor/Mesh" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.190947, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.267894, 0)
 
 [node name="Cylinder_002" parent="MeshAnchor/Mesh" index="2"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.190947, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.267894, 0)
 
 [node name="Cylinder" parent="MeshAnchor/Mesh" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.190947, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.267894, 0)
 
 [node name="Cube" parent="MeshAnchor/Mesh" index="4"]
-transform = Transform3D(-0.911441, 0, -0.411432, 0, 1, 0, 0.411432, 0, -0.911441, 0, 0.190962, 0)
+transform = Transform3D(0.999735, 0, 0.0230079, 0, 1, 0, -0.0230079, 0, 0.999735, 0, 0.267894, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -120,6 +122,9 @@ script = ExtResource("3_ekxp3")
 
 [node name="LoopComponent" type="Node" parent="."]
 script = ExtResource("3_evxum")
+
+[node name="GlowEffectMesh" type="MeshInstance3D" parent="LoopComponent"]
+mesh = SubResource("ArrayMesh_a4rij")
 
 [node name="GrazeComponent" type="Area3D" parent="."]
 collision_layer = 0

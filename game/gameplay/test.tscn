@@ -83,7 +83,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.29722, 0, 0)
 [node name="EnemySphereRed" parent="." instance=ExtResource("9_7t0av")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7781, 0, 6.90224)
 
-[node name="Path3D" parent="EnemySphereRed" index="6"]
+[node name="Path3D" parent="EnemySphereRed" index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9, 0, 7.55)
 
 [editable path="EnemySphereRed"]

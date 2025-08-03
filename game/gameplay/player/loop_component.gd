@@ -9,6 +9,11 @@ signal loop_completed(points: PackedVector2Array)
 @export var self_intersection_tolerance: float = 0.01
 @export var min_point_distance_for_collection: float = 0.1
 
+@export var glow_color: Color = Color.CYAN
+
+@onready var glow_effect_mesh: MeshInstance3D = $GlowEffectMesh
+
+
 enum State { IDLE, DRAWING }
 var current_state: State = State.IDLE
 
@@ -34,6 +39,17 @@ func _ready() -> void:
 	sample_timer.one_shot = false
 	sample_timer.timeout.connect(_on_sample_timer_timeout)
 	add_child(sample_timer)
+	
+	var glow_material = StandardMaterial3D.new()
+
+	glow_material.transparency = StandardMaterial3D.TRANSPARENCY_ALPHA
+	glow_material.shading_mode = StandardMaterial3D.SHADING_MODE_UNSHADED
+	glow_material.emission_enabled = true
+	glow_material.emission = glow_color
+	
+	glow_material.albedo_color = Color(glow_color, 0.0)
+
+	glow_effect_mesh.material_override = glow_material
 	
 	SceneSetManager.scene_set_initialized.connect(_on_scene_set_initialized)
 
@@ -139,11 +155,13 @@ func _handle_loop_completion(loop_polygon_2d: PackedVector2Array) -> void:
 	loop_detected_flag = true
 	current_state = State.IDLE
 	sample_timer.stop()
+	_play_glow_effect(loop_polygon_2d)
 
 	print("Loop Completed! Polygon has %d points." % loop_polygon_2d.size())
 
 	loop_completed.emit(loop_polygon_2d)
 	loop_area.set_polygon(loop_polygon_2d)
+	
 	detected_loops_buffer.append(loop_polygon_2d)
 
 	_clear_path()
@@ -154,3 +172,26 @@ func _clear_path() -> void:
 	points_buffer_2d.clear()
 	if loop_path and loop_path.curve:
 		loop_path.curve.clear_points()
+
+
+func _play_glow_effect(polygon: PackedVector2Array):
+	var triangle_indices = Geometry2D.triangulate_polygon(polygon)
+	var vertices_3d = PackedVector3Array()
+	for point in polygon:
+		vertices_3d.append(Vector3(point.x, 0.01, point.y))
+		
+	var array_mesh = ArrayMesh.new()
+	var mesh_data = []
+	mesh_data.resize(Mesh.ARRAY_MAX)
+	mesh_data[Mesh.ARRAY_VERTEX] = vertices_3d
+	mesh_data[Mesh.ARRAY_INDEX] = triangle_indices
+	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, mesh_data)
+	glow_effect_mesh.mesh = array_mesh
+	
+	var material = glow_effect_mesh.material_override as StandardMaterial3D
+	if not material: return
+	
+	var tween = create_tween()
+	tween.tween_property(material, "albedo_color:a", 1.0, 0.15).set_trans(Tween.TRANS_CUBIC)
+	tween.chain().tween_property(material, "albedo_color:a", 0.0, 0.25).set_trans(Tween.TRANS_QUINT)
+	tween.finished.connect(func(): glow_effect_mesh.mesh = null)

@@ -186,7 +186,7 @@ func _play_glow_effect(polygon: PackedVector2Array):
 	var triangle_indices = Geometry2D.triangulate_polygon(polygon)
 	var vertices_3d = PackedVector3Array()
 	for point in polygon:
-		vertices_3d.append(Vector3(point.x, 0.01, point.y))
+		vertices_3d.append(Vector3(point.x, _get_ground_position().y + 0.01, point.y))
 		
 	var array_mesh = ArrayMesh.new()
 	var mesh_data = []

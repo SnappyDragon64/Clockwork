@@ -1,4 +1,4 @@
-extends Control
+class_name HUD extends Control
 
 
 const SP_BAR_ANIMATION_DURATION: float = 0.2
@@ -6,6 +6,7 @@ const SP_BAR_ANIMATION_DURATION: float = 0.2
 var _active_health_tween: Tween
 var _active_sp_tween: Tween
 
+@onready var text_label: Label = %Text
 
 func _ready() -> void:
 	EventBus.subscribe(Events.PLAYER_HEALTH_CHANGED, _on_player_health_changed)
@@ -36,3 +37,7 @@ func _on_player_sp_changed(data: Dictionary) -> void:
 	
 	_active_sp_tween = create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	_active_sp_tween.tween_property(%SPBar, "value", target_value, SP_BAR_ANIMATION_DURATION)
+
+
+func set_text(text: String) -> void:
+	text_label.set_text(text)

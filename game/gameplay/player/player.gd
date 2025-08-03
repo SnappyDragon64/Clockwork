@@ -77,4 +77,4 @@ func _on_death() -> void:
 		set_visible(false)
 		dead = true
 		await get_tree().create_timer(1.0).timeout
-		EventBus.publish(Events.PLAYER_DIED)
+		SceneSetManager.reload_current_set()

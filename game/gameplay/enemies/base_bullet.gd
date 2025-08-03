@@ -26,6 +26,8 @@ func _ready() -> void:
 	
 	EventBus.subscribe(Events.PLAYER_BULLET_TIME_STARTED, _on_bullet_time_started)
 	EventBus.subscribe(Events.PLAYER_BULLET_TIME_ENDED, _on_bullet_time_ended)
+	
+	set_collision_mask_value(1, true)
 
 
 func _physics_process(delta: float) -> void:

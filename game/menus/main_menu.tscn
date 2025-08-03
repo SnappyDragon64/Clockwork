@@ -68,6 +68,7 @@ layout_mode = 2
 
 [node name="PlayButton" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_3qs1h")]
 unique_name_in_owner = true
+process_mode = 3
 layout_mode = 2
 button_text = "PLAY"
 

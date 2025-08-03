@@ -1,7 +1,7 @@
 class_name CameraAnchor extends Node3D
 
 
-var offset: Vector3 = Vector3(0, 8, 10)
+var offset: Vector3 = Vector3(0, 12, 14)
 var player_position: Vector3
 var min_x: float = -12.0
 var max_x: float = 12.0

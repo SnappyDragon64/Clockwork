@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bt50vtqk3r6gr"]
+[gd_scene load_steps=3 format=3 uid="uid://bt50vtqk3r6gr"]
 
 [ext_resource type="Script" uid="uid://boxti6mjfixq5" path="res://game/gameplay/world/music_player.gd" id="1_3hak4"]
+[ext_resource type="AudioStream" uid="uid://jam2k3m83pja" path="res://music/mus_bg.mp3" id="2_bwc1r"]
 
 [node name="MusicPlayer" type="Node"]
 script = ExtResource("1_3hak4")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_bwc1r")
 autoplay = true

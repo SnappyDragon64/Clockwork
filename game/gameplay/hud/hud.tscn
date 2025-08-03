@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://mmgjqw6ph2un"]
+[gd_scene load_steps=13 format=3 uid="uid://mmgjqw6ph2un"]
 
 [ext_resource type="Script" uid="uid://dd87va704jql7" path="res://game/gameplay/hud/hud.gd" id="1_c2j0q"]
 [ext_resource type="Texture2D" uid="uid://dooc1l7kg0adq" path="res://assets/sprites/ui/hud_bg.png" id="1_kg56y"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dingjyassgo88" path="res://assets/sprites/ui/bullet_time_bar_bg.png" id="4_xabtm"]
 [ext_resource type="Texture2D" uid="uid://doh3ta6nh4n20" path="res://assets/sprites/ui/bullet_time_gear.png" id="5_em0te"]
 [ext_resource type="Texture2D" uid="uid://b7xvl3jurdtbd" path="res://assets/sprites/ui/bullet_time_gear_small.png" id="6_c2j0q"]
+[ext_resource type="Texture2D" uid="uid://dc371icj5w8bo" path="res://assets/sprites/ui/UI_text_holder.png" id="8_bbter"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nkylc"]
 bg_color = Color(0.356863, 0.290196, 0.415686, 1)
@@ -239,3 +240,40 @@ theme_override_styles/background = SubResource("StyleBoxFlat_6j0ws")
 theme_override_styles/fill = SubResource("StyleBoxFlat_em0te")
 fill_mode = 3
 show_percentage = false
+
+[node name="TextHolder" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(700, 145.2)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1750.0
+offset_top = -363.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(1750, 363)
+texture = ExtResource("8_bbter")
+
+[node name="MarginContainer" type="MarginContainer" parent="TextHolder"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_top = 70
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 70
+
+[node name="Label" type="Label" parent="TextHolder/MarginContainer"]
+custom_minimum_size = Vector2(700, 120)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 50
+text = "HI this is a tutorial text, I wonder how much text can fit here currently. this thing still refuses to go to the next line oh my god what the frick"
+autowrap_mode = 2

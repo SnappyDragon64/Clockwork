@@ -125,6 +125,7 @@ libraries = {
 }
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 64
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
@@ -132,6 +133,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 shape = SubResource("BoxShape3D_57hrx")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="."]
+collision_layer = 64
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]

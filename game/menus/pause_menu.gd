@@ -16,8 +16,8 @@ extends Control
 @onready var restart_button: CustomMenuButton = %RestartButton
 @onready var quit_button: CustomMenuButton = %QuitButton
 
-const ANIMATION_DURATION: float = 0.16
-const BUTTON_ANIMATION_DURATION: float = 0.12
+const ANIMATION_DURATION: float = 0.12
+const BUTTON_ANIMATION_DURATION: float = 0.08
 const TARGET_ALPHA_FLOAT: float = 1.0
 const BASE_ALPHA_FLOAT: float = 0.0
 

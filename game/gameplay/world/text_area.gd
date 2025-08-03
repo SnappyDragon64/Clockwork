@@ -2,7 +2,7 @@ class_name TextArea extends Area3D
 
 @export var text = ""
 var hud: HUD
-
+var touched = false
 
 func _on_ready() -> void:
 	collision_layer = 0
@@ -19,4 +19,6 @@ func _on_scene_set_initialized(context: SceneSetContext) -> void:
 
 
 func _on_body_entered():
-	hud.set_text(text)
+	if not touched:
+		touched = true
+		hud.set_text(text)

@@ -11,6 +11,7 @@ class_name PathLine3D
 var _last_curve_positions_hash: int = 0
 
 func _ready() -> void:
+	self.mesh = null
 	_generate_mesh()
 
 func _process(_delta: float) -> void:
@@ -129,3 +130,7 @@ func hash_combine(hash1: int, hash2: int) -> int:
 	var h2: int = hash2
 	h1 = h1 ^ (h2 + 0x9e3779b9 + (h1 << 6) + (h1 >> 2))
 	return h1
+
+func _exit_tree() -> void:
+	# Set the mesh to null to clear the geometry when the node exits the scene tree.
+	self.mesh = null

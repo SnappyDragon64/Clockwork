@@ -1,18 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8oivy5sm13v7"]
+[gd_scene load_steps=7 format=3 uid="uid://b8oivy5sm13v7"]
 
 [ext_resource type="Script" uid="uid://bltnxvnd7bo6v" path="res://game/gameplay/enemies/base_bullet.gd" id="1_xccjp"]
 [ext_resource type="Shader" uid="uid://dfmivttj22nhv" path="res://assets/shaders/outline.gdshader" id="2_1vf36"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_v6r4e"]
+radius = 0.25
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xypv6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vf36"]
 render_priority = 0
 shader = ExtResource("2_1vf36")
-shader_parameter/outline_color = Color(0.943409, 0.13591, 0.276123, 1)
-shader_parameter/outline_width = 1.0
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/outline_width = 4.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nyi8l"]
+next_pass = SubResource("ShaderMaterial_1vf36")
+shading_mode = 0
+albedo_color = Color(0.945098, 0.137255, 0.27451, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_1vf36"]
-material = SubResource("ShaderMaterial_xypv6")
+material = SubResource("StandardMaterial3D_nyi8l")
+radius = 0.25
+height = 0.5
 
 [node name="BaseBullet" type="Area3D"]
 collision_layer = 16
@@ -20,9 +28,9 @@ collision_mask = 3
 script = ExtResource("1_xccjp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 1, 0)
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0.5, 0)
 shape = SubResource("SphereShape3D_v6r4e")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 1, 0)
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0.5, 0)
 mesh = SubResource("SphereMesh_1vf36")

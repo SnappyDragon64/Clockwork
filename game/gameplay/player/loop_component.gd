@@ -12,7 +12,9 @@ signal loop_completed(points: PackedVector2Array)
 @export var glow_color: Color = Color.CYAN
 
 @onready var glow_effect_mesh: MeshInstance3D = $GlowEffectMesh
+@export var max_y_deviation: float = 0.01
 
+var start_y: float
 
 enum State { IDLE, DRAWING }
 var current_state: State = State.IDLE
@@ -64,6 +66,11 @@ func _on_scene_set_initialized(_context: SceneSetContext):
 
 func _process(delta: float) -> void:
 	if current_state == State.DRAWING and not loop_detected_flag:
+		if abs(player.global_position.y - start_y) > max_y_deviation:
+			print("Loop broken due to Y-level change.")
+			_on_loop_stopped()
+			return
+			
 		_update_realtime_loop_detection()
 
 
@@ -72,6 +79,7 @@ func _on_loop_started() -> void:
 	if current_state == State.IDLE:
 		current_state = State.DRAWING
 		_clear_path()
+		start_y = player.global_position.y
 		loop_detected_flag = false
 
 		var first_point_3d = _get_ground_position()
@@ -178,7 +186,7 @@ func _play_glow_effect(polygon: PackedVector2Array):
 	var triangle_indices = Geometry2D.triangulate_polygon(polygon)
 	var vertices_3d = PackedVector3Array()
 	for point in polygon:
-		vertices_3d.append(Vector3(point.x, _get_ground_position().z, point.y))
+		vertices_3d.append(Vector3(point.x, _get_ground_position().y + 0.01, point.y))
 		
 	var array_mesh = ArrayMesh.new()
 	var mesh_data = []

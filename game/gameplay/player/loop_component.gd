@@ -5,9 +5,9 @@ signal loop_completed(points: PackedVector2Array)
 
 @export var min_points_for_loop: int = 4
 @export var min_loop_detection_distance: float = 0.5
-@export var point_collection_interval: float = 0.1
+@export var point_collection_interval: float = 0.25
 @export var self_intersection_tolerance: float = 0.01
-@export var min_point_distance_for_collection: float = 0.1
+@export var min_point_distance_for_collection: float = 0.25
 
 @export var glow_color: Color = Color.CYAN
 

@@ -6,7 +6,7 @@ const SP_BAR_ANIMATION_DURATION: float = 0.2
 var _active_health_tween: Tween
 var _active_sp_tween: Tween
 
-var text_label: Label = %Text
+@onready var text_label: Label = %Text
 
 func _ready() -> void:
 	EventBus.subscribe(Events.PLAYER_HEALTH_CHANGED, _on_player_health_changed)

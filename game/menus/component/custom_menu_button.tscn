@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://diqpykxpvm737"]
 
-[ext_resource type="Script" uid="uid://c6x2d78owj1q6" path="res://game/menus/component/menu_button.gd" id="1_b1ye7"]
+[ext_resource type="Script" uid="uid://c6x2d78owj1q6" path="res://game/menus/component/custom_menu_button.gd" id="1_b1ye7"]
 [ext_resource type="Texture2D" uid="uid://dl2uei1ug4d8" path="res://assets/sprites/ui/pause_menu_card.png" id="1_ns301"]
 [ext_resource type="Texture2D" uid="uid://cs2og0f8iusso" path="res://assets/sprites/ui/pause_menu_gear.png" id="2_b1ye7"]
 [ext_resource type="FontFile" uid="uid://ddvse12mldifw" path="res://assets/fonts/Righteous-Regular.ttf" id="3_28h8n"]
@@ -9,7 +9,6 @@
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_b1ye7")
-button_text = null
 
 [node name="Button" type="TextureButton" parent="."]
 unique_name_in_owner = true

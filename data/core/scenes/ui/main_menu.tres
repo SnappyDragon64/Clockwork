@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SceneEntry" load_steps=3 format=3 uid="uid://derfr0dun1msl"]
+
+[ext_resource type="Script" uid="uid://dycnwq5aitmfg" path="res://core/definitions/scene_entry.gd" id="1_1v8bi"]
+[ext_resource type="Resource" uid="uid://iyhdit84hd44" path="res://data/core/layers/menu.tres" id="1_x5jeo"]
+
+[resource]
+script = ExtResource("1_1v8bi")
+path = "uid://b2klym4x075s7"
+layer_entry = ExtResource("1_x5jeo")
+metadata/_custom_type_script = "uid://dycnwq5aitmfg"

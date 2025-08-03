@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="SceneEntry" load_steps=2 format=3 uid="uid://derfr0dun1msl"]
-
-[ext_resource type="Script" uid="uid://dycnwq5aitmfg" path="res://core/definitions/scene_entry.gd" id="1_8uaql"]
-
-[resource]
-script = ExtResource("1_8uaql")
-path = ""
-metadata/_custom_type_script = "uid://dycnwq5aitmfg"

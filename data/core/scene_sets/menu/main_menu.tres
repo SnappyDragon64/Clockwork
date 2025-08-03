@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SceneSetEntry" load_steps=4 format=3 uid="uid://6lrhpn4nqxba"]
 
 [ext_resource type="Script" uid="uid://dycnwq5aitmfg" path="res://core/definitions/scene_entry.gd" id="1_bgec2"]
-[ext_resource type="Resource" uid="uid://derfr0dun1msl" path="res://data/core/scenes/menu/main_menu.tres" id="2_kphag"]
+[ext_resource type="Resource" uid="uid://derfr0dun1msl" path="res://data/core/scenes/ui/main_menu.tres" id="2_kphag"]
 [ext_resource type="Script" uid="uid://bw6bt8uu7yj57" path="res://core/definitions/scene_set_entry.gd" id="2_tprkc"]
 
 [resource]

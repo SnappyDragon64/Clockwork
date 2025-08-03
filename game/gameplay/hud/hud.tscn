@@ -1,14 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://mmgjqw6ph2un"]
+[gd_scene load_steps=12 format=3 uid="uid://mmgjqw6ph2un"]
 
+[ext_resource type="Script" uid="uid://dd87va704jql7" path="res://game/gameplay/hud/hud.gd" id="1_c2j0q"]
 [ext_resource type="Texture2D" uid="uid://dooc1l7kg0adq" path="res://assets/sprites/ui/hud_bg.png" id="1_kg56y"]
 [ext_resource type="Texture2D" uid="uid://cm6nvngx2dutt" path="res://assets/sprites/ui/health_icon.png" id="2_13atq"]
 [ext_resource type="Texture2D" uid="uid://cahppuifiiyq" path="res://assets/sprites/ui/health_bar_bg.png" id="3_nkylc"]
+[ext_resource type="Texture2D" uid="uid://dingjyassgo88" path="res://assets/sprites/ui/bullet_time_bar_bg.png" id="4_xabtm"]
+[ext_resource type="Texture2D" uid="uid://doh3ta6nh4n20" path="res://assets/sprites/ui/bullet_time_gear.png" id="5_em0te"]
+[ext_resource type="Texture2D" uid="uid://b7xvl3jurdtbd" path="res://assets/sprites/ui/bullet_time_gear_small.png" id="6_c2j0q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nkylc"]
 bg_color = Color(0.356863, 0.290196, 0.415686, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xabtm"]
 bg_color = Color(0.772549, 0.47451, 0.960784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6j0ws"]
+bg_color = Color(0.392157, 0.34902, 0.231373, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_em0te"]
+bg_color = Color(1, 0.713726, 0, 1)
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -17,6 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_c2j0q")
 
 [node name="Control" type="TextureRect" parent="."]
 layout_mode = 0
@@ -53,32 +64,178 @@ layout_mode = 2
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 
-[node name="ProgressBar" type="ProgressBar" parent="Control/VBoxContainer/HBoxContainer/Padding3"]
+[node name="HealthBar" type="ProgressBar" parent="Control/VBoxContainer/HBoxContainer/Padding3"]
+unique_name_in_owner = true
 z_index = 1
-custom_minimum_size = Vector2(560, 32)
+custom_minimum_size = Vector2(560, 24)
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -16.0
-offset_right = 480.0
-offset_bottom = 16.0
+offset_top = -12.0
+offset_right = 560.0
+offset_bottom = 12.0
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_nkylc")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xabtm")
-value = 50.0
+value = 100.0
 show_percentage = false
 
 [node name="TextureRect2" type="TextureRect" parent="Control/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_nkylc")
 
-[node name="Control2" type="Control" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="Padding" type="Control" parent="HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -229.0
+offset_right = 64.0
+offset_bottom = 229.0
+grow_vertical = 2
+texture = ExtResource("4_xabtm")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Control/TextureRect"]
+custom_minimum_size = Vector2(32, 200)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_right = 16.0
+offset_bottom = 444.0
+grow_horizontal = 2
+
+[node name="Padding" type="Control" parent="HBoxContainer/Control/TextureRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HBoxContainer/Control/TextureRect/VBoxContainer/Padding"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="HBoxContainer/Control/TextureRect/VBoxContainer/Padding/Control"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -10.0
+offset_bottom = 10.0
+grow_horizontal = 0
+
+[node name="Control" type="Control" parent="HBoxContainer/Control/TextureRect/VBoxContainer/Padding/Control/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="Control" type="Control" parent="HBoxContainer/Control/TextureRect/VBoxContainer/Padding/Control/Control/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="HBoxContainer/Control/TextureRect/VBoxContainer/Padding/Control/Control/Control/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = 12.0
+offset_right = -4.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="HBoxContainer/Control/TextureRect/VBoxContainer/Padding/Control/Control/Control/Control/Control"]
+anchors_preset = 0
+offset_left = -16.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 8.0
+
+[node name="Control" type="Control" parent="HBoxContainer/Control/TextureRect/VBoxContainer/Padding/Control/Control/Control/Control/Control/Control"]
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -24.0
+offset_right = 22.0
+offset_bottom = -18.0
+grow_vertical = 0
+
+[node name="Control" type="Control" parent="HBoxContainer/Control/TextureRect/VBoxContainer/Padding/Control/Control/Control/Control/Control/Control/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer/Control/TextureRect/VBoxContainer/Padding/Control/Control/Control/Control/Control/Control/Control/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+offset_right = 80.0
+grow_vertical = 0
+texture = ExtResource("5_em0te")
+
+[node name="Control2" type="Control" parent="HBoxContainer/Control/TextureRect/VBoxContainer/Padding/Control/Control/Control/Control"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Control/TextureRect/VBoxContainer/Padding/Control/Control/Control/Control/Control2"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
 offset_bottom = 40.0
+grow_horizontal = 0
+texture = ExtResource("6_c2j0q")
+
+[node name="SPBar" type="ProgressBar" parent="HBoxContainer/Control/TextureRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_6j0ws")
+theme_override_styles/fill = SubResource("StyleBoxFlat_em0te")
+fill_mode = 3
+show_percentage = false

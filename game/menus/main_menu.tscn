@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2klym4x075s7"]
+
+[ext_resource type="Script" uid="uid://cotmfi2bk36e3" path="res://game/menus/main_menu.gd" id="1_arsjm"]
+[ext_resource type="Texture2D" uid="uid://d22xnkec8buu4" path="res://assets/sprites/ui/main_menu_bg.png" id="1_htn6l"]
+[ext_resource type="Texture2D" uid="uid://dtyedscunah5p" path="res://assets/sprites/ui/ui_logo.png" id="2_arsjm"]
+[ext_resource type="PackedScene" uid="uid://diqpykxpvm737" path="res://game/menus/component/custom_menu_button.tscn" id="3_3qs1h"]
+
+[node name="MainMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_arsjm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.8, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -540.0
+offset_right = 1920.0
+offset_bottom = 540.0
+grow_vertical = 2
+texture = ExtResource("1_htn6l")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -242.0
+offset_right = 937.0
+offset_bottom = 242.0
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Padding" type="Control" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_arsjm")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Padding" type="Control" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(221, 0)
+layout_mode = 2
+
+[node name="MenuButton" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_3qs1h")]
+layout_mode = 2
+button_text = "PLAY"
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+mouse_filter = 2

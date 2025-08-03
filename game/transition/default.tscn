@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=3 uid="uid://brk67u61wgjt2"]
+
+[ext_resource type="Script" uid="uid://bdywdw0v2nxc7" path="res://core/nodes/transition.gd" id="1_2148r"]
+[ext_resource type="Texture2D" uid="uid://c48evv43bpef8" path="res://assets/sprites/ui/transition.png" id="2_t8dhw"]
+
+[sub_resource type="Animation" id="Animation_bqutt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-3875, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2148r"]
+resource_name = "outro"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1074, 0), Vector2(1920, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_t8dhw"]
+resource_name = "intro"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-4068, 0), Vector2(-1074, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eb5ml"]
+_data = {
+&"RESET": SubResource("Animation_bqutt"),
+&"intro": SubResource("Animation_t8dhw"),
+&"outro": SubResource("Animation_2148r")
+}
+
+[node name="Default" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2148r")
+metadata/_custom_type_script = "uid://bdywdw0v2nxc7"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -4068.0
+offset_bottom = 1080.0
+texture = ExtResource("2_t8dhw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_eb5ml")
+}
+speed_scale = 2.0

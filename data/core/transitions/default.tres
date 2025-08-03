@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="TransitionEntry" load_steps=2 format=3 uid="uid://clnwmviky1rv5"]
+[gd_resource type="Resource" script_class="TransitionEntry" load_steps=3 format=3 uid="uid://clnwmviky1rv5"]
 
+[ext_resource type="Resource" uid="uid://bjtabgloug7p2" path="res://data/core/scenes/transition/default.tres" id="1_6oq0q"]
 [ext_resource type="Script" uid="uid://bkasf4whiowvu" path="res://core/definitions/transition_entry.gd" id="1_650xr"]
 
 [resource]
 script = ExtResource("1_650xr")
+scene_entry = ExtResource("1_6oq0q")
 metadata/_custom_type_script = "uid://bkasf4whiowvu"

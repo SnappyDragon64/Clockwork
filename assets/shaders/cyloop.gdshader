@@ -1,35 +1,33 @@
 shader_type spatial;
 
-render_mode depth_draw_always, blend_mix;
+render_mode depth_draw_always;
 
-uniform vec4 main_color: source_color;
-uniform sampler2D noise_texture: source_color;
-uniform vec4 emission : source_color = vec4(0.0, 0.0, 0.0, 1.0);
-uniform float emission_energy = 1.0;
+uniform vec4 color1 : source_color = vec4(1.0);
+uniform vec4 color2 : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform float lines_scale = 10.0; // Higher values = more lines
 uniform float scroll_speed = 1.0;
-uniform float alpha_threshold = 0.0;
-uniform bool use_threshold = false;
-uniform bool invert_boost_direction = false;
+uniform bool invert_scroll_direction = false;
 
 void fragment() {
-	vec2 moving_uv = UV;
-	vec4 noise = texture(noise_texture, moving_uv);
-	
-	if (invert_boost_direction) {
-		moving_uv.y += TIME * scroll_speed;
-	} else{
-		moving_uv.y -= TIME * scroll_speed;
-	}
-	
-	float noise_value = texture(noise_texture, moving_uv).r;
+	vec2 scrolling_uv = UV;
 
-	ALBEDO = main_color.rgb;
-	EMISSION = emission.rgb * emission_energy * noise.rgb;
-	float alpha = main_color.a * noise_value;
-
-	if (use_threshold && alpha < alpha_threshold) {
-		ALPHA = alpha;
+	// Apply vertical scrolling to the UV coordinates
+	if (invert_scroll_direction) {
+		scrolling_uv.y -= TIME * scroll_speed;
 	} else {
-		ALPHA = alpha;
+		scrolling_uv.y += TIME * scroll_speed;
 	}
+
+	// Create a diagonal pattern by adding x and y, then scale it
+	float pattern = (scrolling_uv.x + scrolling_uv.y) * lines_scale;
+
+	// Use fract() to make the pattern repeat, creating saw-tooth waves
+	// Use step() to turn the gradient into a hard 0 or 1 mask
+	float mask = step(0.5, fract(pattern));
+
+	// Mix the two colors based on the mask to create the final lines
+	// mix(color_a, color_b, weight)
+	vec3 final_color = mix(color1.rgb, color2.rgb, mask);
+
+	ALBEDO = final_color;
 }

@@ -1,39 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtaarst3m50jj"]
+[gd_scene load_steps=5 format=3 uid="uid://dtaarst3m50jj"]
 
 [ext_resource type="Shader" uid="uid://wu02g0sbucjv" path="res://assets/shaders/cyloop.gdshader" id="1_3wuf6"]
 
 [sub_resource type="Curve3D" id="Curve3D_8jyxm"]
 
-[sub_resource type="Gradient" id="Gradient_3wuf6"]
-offsets = PackedFloat32Array(0, 0.484472, 1)
-colors = PackedColorArray(0.666667, 0, 1, 1, 0.206667, 0, 0.31, 1, 0.666667, 0, 1, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_3wuf6"]
-frequency = 0.0158
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3wuf6"]
-width = 40
-height = 40
-seamless = true
-seamless_blend_skirt = 1.0
-color_ramp = SubResource("Gradient_3wuf6")
-noise = SubResource("FastNoiseLite_3wuf6")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3ckxw"]
 render_priority = 0
 shader = ExtResource("1_3wuf6")
-shader_parameter/main_color = Color(1, 0, 1, 1)
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_3wuf6")
-shader_parameter/emission = Color(0, 0, 0, 1)
-shader_parameter/emission_energy = 1.0
-shader_parameter/scroll_speed = 1.0
-shader_parameter/alpha_threshold = 0.0
-shader_parameter/use_threshold = false
-shader_parameter/invert_boost_direction = false
+shader_parameter/color1 = Color(0.878431, 0.572549, 0.960784, 1)
+shader_parameter/color2 = Color(0.435294, 0.0352941, 0.843137, 1)
+shader_parameter/lines_scale = 2.0
+shader_parameter/scroll_speed = 0.5
+shader_parameter/invert_scroll_direction = false
 
 [sub_resource type="BoxMesh" id="BoxMesh_8jyxm"]
 material = SubResource("ShaderMaterial_3ckxw")
-size = Vector3(0.2, 0.01, 0.5)
+size = Vector3(0.25, 0.01, 1)
 
 [node name="LoopPath" type="Path3D"]
 curve = SubResource("Curve3D_8jyxm")

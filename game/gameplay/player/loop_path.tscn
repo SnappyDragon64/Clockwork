@@ -1,6 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dtaarst3m50jj"]
 
 [ext_resource type="Shader" uid="uid://wu02g0sbucjv" path="res://assets/shaders/cyloop.gdshader" id="1_3wuf6"]
+[ext_resource type="Script" uid="uid://b6bc2sl0535lc" path="res://game/gameplay/player/path_line_3d.gd" id="2_3ckxw"]
 
 [sub_resource type="Curve3D" id="Curve3D_8jyxm"]
 
@@ -13,23 +14,12 @@ shader_parameter/lines_scale = 2.0
 shader_parameter/scroll_speed = 0.5
 shader_parameter/invert_scroll_direction = false
 
-[sub_resource type="BoxMesh" id="BoxMesh_8jyxm"]
-material = SubResource("ShaderMaterial_3ckxw")
-size = Vector3(0.25, 0.01, 1)
-
 [node name="LoopPath" type="Path3D"]
 curve = SubResource("Curve3D_8jyxm")
 
-[node name="PathMesh3D" type="PathMesh3D" parent="." node_paths=PackedStringArray("path_3d")]
-path_3d = NodePath("..")
-mesh = SubResource("BoxMesh_8jyxm")
-surface_0/tile_rotation = Vector3(0, 0, 0)
-surface_0/tile_rotation_order = 2
-surface_0/distribution = 0
-surface_0/alignment = 0
-surface_0/warp_along_curve = true
-surface_0/sample_cubic = false
-surface_0/tilt = true
-surface_0/offset = Vector2(0, 0)
-surface_0/triangle_count = 0
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+[node name="PathLine3D" type="MeshInstance3D" parent="." node_paths=PackedStringArray("path_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+script = ExtResource("2_3ckxw")
+path_node = NodePath("..")
+line_material = SubResource("ShaderMaterial_3ckxw")
+metadata/_custom_type_script = "uid://b6bc2sl0535lc"

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cqkpcoye7f4sg" path="res://game/gameplay/enemies/enemy_sphere/blue/enemy_sphere_blue.tscn" id="5_re7e3"]
 [ext_resource type="PackedScene" uid="uid://cbnk351vx1k75" path="res://game/gameplay/entities/towers/health_tower/health_tower.tscn" id="6_re7e3"]
 [ext_resource type="PackedScene" uid="uid://d5w70nuiny5m" path="res://game/gameplay/enemies/turret/turret.tscn" id="7_eix47"]
-[ext_resource type="Script" path="res://game/gameplay/levels/level_goal.gd" id="8_jn7py"]
+[ext_resource type="Script" uid="uid://ck737g4y82je8" path="res://game/gameplay/levels/level_goal.gd" id="8_jn7py"]
 [ext_resource type="Resource" uid="uid://bwmexosry0qbb" path="res://data/core/scene_sets/level1.tres" id="9_v5cbo"]
 
 [sub_resource type="Environment" id="Environment_lcc23"]

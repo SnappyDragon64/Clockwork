@@ -8,6 +8,9 @@ class_name Scenes
 const TEST: SceneEntry = preload("res://data/core/scenes/test.tres")
 const LEVELS_LEVEL0: SceneEntry = preload("res://data/core/scenes/levels/level0.tres")
 const LEVELS_LEVEL1: SceneEntry = preload("res://data/core/scenes/levels/level1.tres")
+const PARTICLES_HEAL_PARTICLES: SceneEntry = preload("res://data/core/scenes/particles/heal_particles.tres")
+const PARTICLES_HURT_PARTICLES: SceneEntry = preload("res://data/core/scenes/particles/hurt_particles.tres")
+const PARTICLES_LOOP_PARTICLES: SceneEntry = preload("res://data/core/scenes/particles/loop_particles.tres")
 const PLAYER_LOOP_AREA: SceneEntry = preload("res://data/core/scenes/player/loop_area.tres")
 const PLAYER_LOOP_PATH: SceneEntry = preload("res://data/core/scenes/player/loop_path.tres")
 const PLAYER_PLAYER: SceneEntry = preload("res://data/core/scenes/player/player.tres")
@@ -18,7 +21,7 @@ const UI_PAUSE_MENU: SceneEntry = preload("res://data/core/scenes/ui/pause_menu.
 const WORLD_ENTITY_SPAWNER: SceneEntry = preload("res://data/core/scenes/world/entity_spawner.tres")
 const WORLD_MUSIC_PLAYER: SceneEntry = preload("res://data/core/scenes/world/music_player.tres")
 
-static var ALL: Array[SceneEntry] = [TEST, LEVELS_LEVEL0, LEVELS_LEVEL1, PLAYER_LOOP_AREA, PLAYER_LOOP_PATH, PLAYER_PLAYER, TRANSITION_DEFAULT, UI_HUD, UI_MAIN_MENU, UI_PAUSE_MENU, WORLD_ENTITY_SPAWNER, WORLD_MUSIC_PLAYER]
+static var ALL: Array[SceneEntry] = [TEST, LEVELS_LEVEL0, LEVELS_LEVEL1, PARTICLES_HEAL_PARTICLES, PARTICLES_HURT_PARTICLES, PARTICLES_LOOP_PARTICLES, PLAYER_LOOP_AREA, PLAYER_LOOP_PATH, PLAYER_PLAYER, TRANSITION_DEFAULT, UI_HUD, UI_MAIN_MENU, UI_PAUSE_MENU, WORLD_ENTITY_SPAWNER, WORLD_MUSIC_PLAYER]
 
 static func get_all() -> Array[SceneEntry]:
     return ALL

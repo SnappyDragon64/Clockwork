@@ -15,6 +15,9 @@ var invincible: bool = false
 var _iframe_timer
 var _is_bullet_time: bool = false
 
+var heal_particles_scene: PackedScene = preload(Scenes.PARTICLES_HEAL_PARTICLES.path)
+var hurt_particles_scene: PackedScene = preload(Scenes.PARTICLES_HURT_PARTICLES.path)
+
 
 func _ready() -> void:
 	current_health = max_health
@@ -48,6 +51,9 @@ func take_damage(amount: float) -> void:
 	if current_health == 0:
 		print("emitting")
 		died.emit()
+	
+	var hurt_particles = hurt_particles_scene.instantiate()
+	add_sibling(hurt_particles)
 
 
 func add_health(amount: float) -> void:
@@ -57,6 +63,9 @@ func add_health(amount: float) -> void:
 	
 	current_health = min(max_health, current_health + amount)
 	health_changed.emit(current_health, max_health)
+	
+	var heal_particles = heal_particles_scene.instantiate()
+	add_sibling(heal_particles)
 
 
 func _on_gain_health(data: Dictionary) -> void:

@@ -1,0 +1,68 @@
+[gd_scene load_steps=12 format=3 uid="uid://dvrfv2gcfojct"]
+
+[ext_resource type="Script" uid="uid://dxho64nhopb75" path="res://game/gameplay/particles/base_particles.gd" id="1_a64q8"]
+[ext_resource type="Texture2D" uid="uid://ckjwk3jfqr0a0" path="res://assets/sprites/misc/particle.png" id="1_wdv4y"]
+
+[sub_resource type="Gradient" id="Gradient_a64q8"]
+offsets = PackedFloat32Array(0.00689655, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gln0d"]
+gradient = SubResource("Gradient_a64q8")
+
+[sub_resource type="Curve" id="Curve_rnmxi"]
+_limits = [0.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(1, 0.157303), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_gngws"]
+curve_y = SubResource("Curve_rnmxi")
+
+[sub_resource type="Curve" id="Curve_aw2u0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_yeia4"]
+curve = SubResource("Curve_aw2u0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ex5fr"]
+emission_shape_scale = Vector3(0.8, 0.8, 0.8)
+emission_shape = 2
+emission_sphere_radius = 1.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 360.0
+directional_velocity_min = 1.0
+directional_velocity_max = 1.0
+directional_velocity_curve = SubResource("CurveXYZTexture_gngws")
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_yeia4")
+color = Color(0.8, 0.16, 0.16, 1)
+color_ramp = SubResource("GradientTexture1D_gln0d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8aaxc"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_wdv4y")
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_uoesd"]
+material = SubResource("StandardMaterial3D_8aaxc")
+size = Vector2(0.1, 0.1)
+
+[node name="HurtParticles" type="Node3D"]
+script = ExtResource("1_a64q8")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+emitting = false
+amount = 16
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.55
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ex5fr")
+draw_pass_1 = SubResource("QuadMesh_uoesd")

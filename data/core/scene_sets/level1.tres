@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="SceneSetEntry" load_steps=8 format=3 uid="uid://bwmexosry0qbb"]
+
+[ext_resource type="Script" uid="uid://dycnwq5aitmfg" path="res://core/definitions/scene_entry.gd" id="1_bde7r"]
+[ext_resource type="Resource" uid="uid://dahmv7cvy32u3" path="res://data/core/scenes/levels/level1.tres" id="2_bde7r"]
+[ext_resource type="Resource" uid="uid://c6nnjgr56uhme" path="res://data/core/scenes/player/player.tres" id="3_tdmju"]
+[ext_resource type="Resource" uid="uid://3wdpuaql3yxg" path="res://data/core/scenes/world/entity_spawner.tres" id="4_2qctd"]
+[ext_resource type="Resource" uid="uid://dcxm5uxt5i466" path="res://data/core/scenes/ui/pause_menu.tres" id="5_l1wk7"]
+[ext_resource type="Resource" uid="uid://b547tqnns5p8b" path="res://data/core/scenes/ui/hud.tres" id="6_7r6d2"]
+[ext_resource type="Script" uid="uid://bw6bt8uu7yj57" path="res://core/definitions/scene_set_entry.gd" id="7_4dfbu"]
+
+[resource]
+script = ExtResource("7_4dfbu")
+scenes = Array[ExtResource("1_bde7r")]([ExtResource("2_bde7r"), ExtResource("3_tdmju"), ExtResource("4_2qctd"), ExtResource("5_l1wk7"), ExtResource("6_7r6d2")])
+is_pausable = true
+metadata/_custom_type_script = "uid://bw6bt8uu7yj57"

@@ -22,6 +22,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	
+	if not enemy_body.is_on_floor():
+		enemy_body.velocity.y -= 3 * 9.8 * delta
 
 	_move_follow_player(delta)
 	enemy_body.move_and_slide()

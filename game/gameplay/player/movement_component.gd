@@ -7,7 +7,7 @@ var direction: Vector3
 
 func process_physics(delta: float) -> void:
 	if not player.is_on_floor():
-		player.velocity.y -= 9.8 * delta
+		player.velocity.y -= 3 * 9.8 * delta
 
 	player.velocity.x = direction.x * player.speed
 	player.velocity.z = direction.z * player.speed

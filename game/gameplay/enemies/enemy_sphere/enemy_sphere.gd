@@ -12,6 +12,8 @@ func _ready() -> void:
 	health_component.damaged.connect(_on_damaged)
 	
 	loopable_component.activated.connect(_on_activated)
+	
+	set_collision_layer_value(8, true)
 
 
 func _on_death() -> void:

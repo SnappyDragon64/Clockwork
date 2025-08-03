@@ -2,24 +2,24 @@
 
 [ext_resource type="Shader" uid="uid://dfmivttj22nhv" path="res://assets/shaders/outline.gdshader" id="1_ohxs7"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yftf"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aqi34"]
 transparency = 1
 albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_kxobo"]
-material = SubResource("StandardMaterial3D_1yftf")
+material = SubResource("StandardMaterial3D_aqi34")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_45mbi"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_o5vsw"]
 size = Vector3(2, 2, 2)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fk7mw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ohxs7"]
 render_priority = 0
 shader = ExtResource("1_ohxs7")
 shader_parameter/outline_color = Color(0, 0, 0, 1)
 shader_parameter/outline_width = 2.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_euee3"]
-next_pass = SubResource("ShaderMaterial_fk7mw")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jrndv"]
+next_pass = SubResource("ShaderMaterial_ohxs7")
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0, 0.0963333, 0.17, 1)
@@ -32,15 +32,15 @@ clearcoat_roughness = 0.51
 anisotropy = 1.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_45mbi"]
-material = SubResource("StandardMaterial3D_euee3")
+material = SubResource("StandardMaterial3D_jrndv")
 size = Vector3(2, 2, 2)
 
 [sub_resource type="PrismMesh" id="PrismMesh_4qlih"]
-material = SubResource("StandardMaterial3D_euee3")
+material = SubResource("StandardMaterial3D_jrndv")
 left_to_right = 0.0
 size = Vector3(2, 2, 2)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1yftf"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_x35bm"]
 points = PackedVector3Array(1, -1, -1, -1, -1, 1, -1, -1, -1, -1, 1, 1, 1, -1, 1, -1, 1, -1)
 
 [node name="GridmapBase" type="Node3D"]
@@ -52,7 +52,7 @@ mesh = SubResource("BoxMesh_kxobo")
 [node name="StaticBody3D" type="StaticBody3D" parent="InvisWall"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InvisWall/StaticBody3D"]
-shape = SubResource("BoxShape3D_45mbi")
+shape = SubResource("BoxShape3D_o5vsw")
 
 [node name="Block" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -61,7 +61,7 @@ mesh = SubResource("BoxMesh_45mbi")
 [node name="StaticBody3D" type="StaticBody3D" parent="Block"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Block/StaticBody3D"]
-shape = SubResource("BoxShape3D_45mbi")
+shape = SubResource("BoxShape3D_o5vsw")
 
 [node name="Ramp" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -70,4 +70,4 @@ mesh = SubResource("PrismMesh_4qlih")
 [node name="StaticBody3D" type="StaticBody3D" parent="Ramp"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_1yftf")
+shape = SubResource("ConvexPolygonShape3D_x35bm")

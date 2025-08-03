@@ -1,20 +1,26 @@
 class_name Door extends Node3D
 
 @export var key_towers: Array[KeyTower]
+@export var custom_size: int
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var _keys_required: int
 var _keys_activated_count: int = 0
+var _door_open: bool = false
 
 func _ready():
 	if key_towers.is_empty():
 		return
 	
-	_keys_required = key_towers.size()
+	if custom_size == 0:
+		_keys_required = key_towers.size()
+	else:
+		_keys_required = custom_size
 	
 	for tower in key_towers:
 		tower.key_activated.connect(_on_key_tower_activated)
+		tower.key_deactivated.connect(_on_key_tower_deactivated)
 	
 	EventBus.subscribe(Events.PLAYER_BULLET_TIME_STARTED, _on_bullet_time_started)
 	EventBus.subscribe(Events.PLAYER_BULLET_TIME_ENDED, _on_bullet_time_ended)
@@ -25,10 +31,20 @@ func _on_key_tower_activated():
 
 	if _keys_activated_count >= _keys_required:
 		_open_door()
+		_door_open = true
+
+func _on_key_tower_deactivated():
+	_keys_activated_count =- 1
+
+	if _keys_activated_count <= _keys_required and _door_open:
+		_close_door()
 
 
 func _open_door():
 	animation_player.play("open")
+
+func _close_door():
+	animation_player.play_backwards("open")
 
 
 func _on_bullet_time_started(data: Dictionary) -> void:

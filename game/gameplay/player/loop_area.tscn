@@ -8,4 +8,5 @@ collision_mask = 32
 script = ExtResource("1_gtrky")
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 12.5, 0)
+depth = 50.0

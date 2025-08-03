@@ -47,6 +47,9 @@ func _physics_process(delta: float) -> void:
 			
 		MovementType.FOLLOW_PATH:
 			_move_follow_path(delta)
+	
+	if not enemy_body.is_on_floor():
+		enemy_body.velocity.y -= 3 * 9.8 * delta
 
 	enemy_body.move_and_slide()
 

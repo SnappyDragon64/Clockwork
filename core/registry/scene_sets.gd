@@ -6,10 +6,11 @@
 class_name SceneSets
 
 const LEVEL0: SceneSetEntry = preload("res://data/core/scene_sets/level0.tres")
+const LEVEL1: SceneSetEntry = preload("res://data/core/scene_sets/level1.tres")
 const TEST: SceneSetEntry = preload("res://data/core/scene_sets/test.tres")
 const MENU_MAIN_MENU: SceneSetEntry = preload("res://data/core/scene_sets/menu/main_menu.tres")
 
-static var ALL: Array[SceneSetEntry] = [LEVEL0, TEST, MENU_MAIN_MENU]
+static var ALL: Array[SceneSetEntry] = [LEVEL0, LEVEL1, TEST, MENU_MAIN_MENU]
 
 static func get_all() -> Array[SceneSetEntry]:
     return ALL

@@ -7,6 +7,7 @@ class_name Scenes
 
 const TEST: SceneEntry = preload("res://data/core/scenes/test.tres")
 const LEVELS_LEVEL0: SceneEntry = preload("res://data/core/scenes/levels/level0.tres")
+const LEVELS_LEVEL1: SceneEntry = preload("res://data/core/scenes/levels/level1.tres")
 const PLAYER_LOOP_AREA: SceneEntry = preload("res://data/core/scenes/player/loop_area.tres")
 const PLAYER_LOOP_PATH: SceneEntry = preload("res://data/core/scenes/player/loop_path.tres")
 const PLAYER_PLAYER: SceneEntry = preload("res://data/core/scenes/player/player.tres")
@@ -16,7 +17,7 @@ const UI_MAIN_MENU: SceneEntry = preload("res://data/core/scenes/ui/main_menu.tr
 const UI_PAUSE_MENU: SceneEntry = preload("res://data/core/scenes/ui/pause_menu.tres")
 const WORLD_ENTITY_SPAWNER: SceneEntry = preload("res://data/core/scenes/world/entity_spawner.tres")
 
-static var ALL: Array[SceneEntry] = [TEST, LEVELS_LEVEL0, PLAYER_LOOP_AREA, PLAYER_LOOP_PATH, PLAYER_PLAYER, TRANSITION_DEFAULT, UI_HUD, UI_MAIN_MENU, UI_PAUSE_MENU, WORLD_ENTITY_SPAWNER]
+static var ALL: Array[SceneEntry] = [TEST, LEVELS_LEVEL0, LEVELS_LEVEL1, PLAYER_LOOP_AREA, PLAYER_LOOP_PATH, PLAYER_PLAYER, TRANSITION_DEFAULT, UI_HUD, UI_MAIN_MENU, UI_PAUSE_MENU, WORLD_ENTITY_SPAWNER]
 
 static func get_all() -> Array[SceneEntry]:
     return ALL

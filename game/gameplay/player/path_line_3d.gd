@@ -55,8 +55,8 @@ func _generate_mesh() -> void:
 		var point_b_3d: Vector3 = curve.get_point_position(i + 1)
 
 		# Flatten the points to the XZ plane by setting Y to 0.
-		var p1: Vector3 = Vector3(point_a_3d.x, 0.0, point_a_3d.z)
-		var p2: Vector3 = Vector3(point_b_3d.x, 0.0, point_b_3d.z)
+		var p1: Vector3 = Vector3(point_a_3d.x, global_position.y, point_a_3d.z)
+		var p2: Vector3 = Vector3(point_b_3d.x, global_position.y, point_b_3d.z)
 
 		if p1.is_equal_approx(p2):
 			continue

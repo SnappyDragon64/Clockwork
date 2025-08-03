@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://c4tbsfoxx125j" path="res://game/gameplay/entities/gate/gate.tscn" id="5_uouqr"]
 [ext_resource type="PackedScene" uid="uid://d5w70nuiny5m" path="res://game/gameplay/enemies/turret/turret.tscn" id="7_uouqr"]
 [ext_resource type="PackedScene" uid="uid://bkf1g3n4h1w82" path="res://game/gameplay/entities/towers/enemy_tower/enemy_tower.tscn" id="8_7t0av"]
-[ext_resource type="PackedScene" uid="uid://bosm1qcok5w17" path="res://game/gameplay/enemies/enemy_sphere/lime/enemy_sphere_lime.tscn" id="8_uouqr"]
-[ext_resource type="PackedScene" uid="uid://cqkpcoye7f4sg" path="res://game/gameplay/enemies/enemy_sphere/blue/enemy_sphere_blue.tscn" id="9_7t0av"]
+[ext_resource type="PackedScene" uid="uid://chfp5takepaw8" path="res://game/gameplay/enemies/enemy_sphere/red/enemy_sphere_red.tscn" id="9_7t0av"]
+[ext_resource type="PackedScene" uid="uid://u4ywdpnxucmu" path="res://game/gameplay/enemies/enemy_sphere/purple/enemy_sphere_purple.tscn" id="10_x10ux"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r21rc"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -77,8 +77,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.79022, 0, -6.42104)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1906, -4.3, -2.92922)
 enemy_paths = Array[NodePath]([NodePath("../Turret")])
 
-[node name="EnemySphereLime" parent="." instance=ExtResource("8_uouqr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.31432)
+[node name="EnemySpherePurple" parent="." instance=ExtResource("10_x10ux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.29722, 0, 0)
 
-[node name="EnemySphereBlue" parent="." instance=ExtResource("9_7t0av")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.82926)
+[node name="EnemySphereRed" parent="." instance=ExtResource("9_7t0av")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7781, 0, 6.90224)
+
+[node name="Path3D" parent="EnemySphereRed" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9, 0, 7.55)
+
+[editable path="EnemySphereRed"]

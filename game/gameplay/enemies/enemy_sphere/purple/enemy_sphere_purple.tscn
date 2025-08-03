@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cjopv7kqu086f" path="res://game/gameplay/enemies/enemy_sphere/purple/enemy_sphere_mesh_purple.tscn" id="3_brvmr"]
 [ext_resource type="Script" uid="uid://pjqqau73xcwd" path="res://game/gameplay/components/health_component.gd" id="4_84bfh"]
 [ext_resource type="Script" uid="uid://btv2e13p4ifjo" path="res://game/gameplay/enemies/shooter_component.gd" id="5_qv8s5"]
-[ext_resource type="Resource" uid="uid://tyvguk1sc1y4" path="res://data/game/shooter_patterns/base_enemy_pattern.tres" id="6_j7otf"]
+[ext_resource type="Resource" uid="uid://2upld2abswmo" path="res://data/game/shooter_patterns/purple_enemy_pattern.tres" id="6_l4288"]
 [ext_resource type="Script" uid="uid://d657ej0ut2e7" path="res://game/gameplay/components/loopable_component.gd" id="7_to4c4"]
 [ext_resource type="Script" uid="uid://ci2pwdkhsqu5d" path="res://game/gameplay/enemies/enemy_movement_component.gd" id="8_i5nm8"]
 [ext_resource type="Script" uid="uid://dovoymatk0481" path="res://game/gameplay/components/animation_component.gd" id="9_ehj2x"]
@@ -46,7 +46,7 @@ metadata/_custom_type_script = "uid://pjqqau73xcwd"
 
 [node name="ShooterComponent" type="Node3D" parent="."]
 script = ExtResource("5_qv8s5")
-pattern = ExtResource("6_j7otf")
+pattern = ExtResource("6_l4288")
 metadata/_custom_type_script = "uid://btv2e13p4ifjo"
 
 [node name="LoopableComponent" type="Area3D" parent="."]
@@ -61,6 +61,9 @@ debug_color = Color(0.843285, 0.00105868, 0.915671, 0.42)
 [node name="EnemyMovementComponent" type="Node3D" parent="."]
 script = ExtResource("8_i5nm8")
 look_at_player = true
+movement_type = 1
+speed = 2.0
+stopping_distance = 4.0
 metadata/_custom_type_script = "uid://ci2pwdkhsqu5d"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]

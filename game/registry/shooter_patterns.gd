@@ -9,8 +9,11 @@ const BASE_ENEMY_PATTERN: ShooterPatternEntry = preload("res://data/game/shooter
 const BLUE_ENEMY_PATTERN: ShooterPatternEntry = preload("res://data/game/shooter_patterns/blue_enemy_pattern.tres")
 const GREEN_ENEMY_PATTERN: ShooterPatternEntry = preload("res://data/game/shooter_patterns/green_enemy_pattern.tres")
 const LIME_ENEMY_PATTERN: ShooterPatternEntry = preload("res://data/game/shooter_patterns/lime_enemy_pattern.tres")
+const PURPLE_ENEMY_PATTERN: ShooterPatternEntry = preload("res://data/game/shooter_patterns/purple_enemy_pattern.tres")
+const RED_ENEMY_PATTERN: ShooterPatternEntry = preload("res://data/game/shooter_patterns/red_enemy_pattern.tres")
+const YELLOW_ENEMY_PATTERN: ShooterPatternEntry = preload("res://data/game/shooter_patterns/yellow_enemy_pattern.tres")
 
-static var ALL: Array[ShooterPatternEntry] = [BASE_ENEMY_PATTERN, BLUE_ENEMY_PATTERN, GREEN_ENEMY_PATTERN, LIME_ENEMY_PATTERN]
+static var ALL: Array[ShooterPatternEntry] = [BASE_ENEMY_PATTERN, BLUE_ENEMY_PATTERN, GREEN_ENEMY_PATTERN, LIME_ENEMY_PATTERN, PURPLE_ENEMY_PATTERN, RED_ENEMY_PATTERN, YELLOW_ENEMY_PATTERN]
 
 static func get_all() -> Array[ShooterPatternEntry]:
     return ALL

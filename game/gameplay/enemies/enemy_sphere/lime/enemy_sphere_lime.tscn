@@ -65,3 +65,4 @@ script = ExtResource("9_lx6vy")
 [node name="EnemyMovementController" type="Node3D" parent="."]
 script = ExtResource("9_o60vp")
 look_at_player = true
+speed = 6.0

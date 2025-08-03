@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ShooterPatternEntry" load_steps=2 format=3 uid="uid://ch5xn28srm3c8"]
+
+[ext_resource type="Script" uid="uid://cit3oqugk627r" path="res://game/definitions/shooter_pattern_entry.gd" id="1_o0v02"]
+
+[resource]
+script = ExtResource("1_o0v02")
+path = "uid://b8oivy5sm13v7"
+speed = 6.0
+damage = 1.0
+lifetime = 4.0
+cooldown = 2.0
+rounds = 1
+rate = 0.0
+bullets = 3
+spread = 60.0
+radius = 1.0
+angle_offset = 0.0

@@ -61,6 +61,9 @@ debug_color = Color(0.843285, 0.00105868, 0.915671, 0.42)
 [node name="EnemyMovementComponent" type="Node3D" parent="."]
 script = ExtResource("8_eufad")
 look_at_player = true
+movement_type = 1
+speed = 2.0
+stopping_distance = 4.0
 metadata/_custom_type_script = "uid://ci2pwdkhsqu5d"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]

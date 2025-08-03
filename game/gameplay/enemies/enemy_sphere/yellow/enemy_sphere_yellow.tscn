@@ -1,13 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://4mxil6j3c01r"]
+[gd_scene load_steps=15 format=3 uid="uid://4mxil6j3c01r"]
 
 [ext_resource type="Script" uid="uid://b52cxmd1mk78g" path="res://game/gameplay/enemies/enemy_sphere/enemy_sphere.gd" id="1_2fge1"]
 [ext_resource type="Script" uid="uid://dkb4crivrkpke" path="res://game/gameplay/components/mesh_anchor.gd" id="2_pe2gf"]
 [ext_resource type="PackedScene" uid="uid://c7uncfpmygdai" path="res://game/gameplay/enemies/enemy_sphere/yellow/enemy_sphere_mesh_yellow.tscn" id="3_j2wrx"]
 [ext_resource type="Script" uid="uid://pjqqau73xcwd" path="res://game/gameplay/components/health_component.gd" id="4_wvjur"]
 [ext_resource type="Script" uid="uid://btv2e13p4ifjo" path="res://game/gameplay/enemies/shooter_component.gd" id="5_7w5df"]
-[ext_resource type="Resource" uid="uid://tyvguk1sc1y4" path="res://data/game/shooter_patterns/base_enemy_pattern.tres" id="6_82bns"]
+[ext_resource type="Resource" uid="uid://cxvv0owv3jdn3" path="res://data/game/shooter_patterns/yellow_enemy_pattern.tres" id="6_2fge1"]
 [ext_resource type="Script" uid="uid://d657ej0ut2e7" path="res://game/gameplay/components/loopable_component.gd" id="7_q87ac"]
-[ext_resource type="Script" uid="uid://ci2pwdkhsqu5d" path="res://game/gameplay/enemies/enemy_movement_component.gd" id="8_06ecw"]
+[ext_resource type="Script" uid="uid://bc73a7lf0roe6" path="res://game/gameplay/enemies/enemy_sphere/lime/lime_enemy_movement_controller.gd" id="9_2fge1"]
 [ext_resource type="Script" uid="uid://dovoymatk0481" path="res://game/gameplay/components/animation_component.gd" id="9_620po"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_61msn"]
@@ -20,10 +20,15 @@ radius = 0.8
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ahaa"]
 animation = &"Idle"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2fge1"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2xvkl"]
 allow_transition_to_self = true
 states/Idle/node = SubResource("AnimationNodeAnimation_5ahaa")
 states/Idle/position = Vector2(535, 100)
+states/Start/position = Vector2(213, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_2fge1")]
 
 [node name="EnemySphereYellow" type="CharacterBody3D"]
 collision_layer = 8
@@ -46,7 +51,8 @@ metadata/_custom_type_script = "uid://pjqqau73xcwd"
 
 [node name="ShooterComponent" type="Node3D" parent="."]
 script = ExtResource("5_7w5df")
-pattern = ExtResource("6_82bns")
+pattern = ExtResource("6_2fge1")
+alt_offset = true
 metadata/_custom_type_script = "uid://btv2e13p4ifjo"
 
 [node name="LoopableComponent" type="Area3D" parent="."]
@@ -58,11 +64,11 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1, 
 shape = SubResource("CapsuleShape3D_2fge1")
 debug_color = Color(0.843285, 0.00105868, 0.915671, 0.42)
 
-[node name="EnemyMovementComponent" type="Node3D" parent="."]
-script = ExtResource("8_06ecw")
-look_at_player = true
-metadata/_custom_type_script = "uid://ci2pwdkhsqu5d"
-
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_2xvkl")
 script = ExtResource("9_620po")
+
+[node name="EnemyMovementController" type="Node3D" parent="."]
+script = ExtResource("9_2fge1")
+spin = true
+speed = 6.0

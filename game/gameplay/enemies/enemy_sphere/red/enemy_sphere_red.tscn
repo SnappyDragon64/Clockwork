@@ -1,11 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://chfp5takepaw8"]
+[gd_scene load_steps=15 format=3 uid="uid://chfp5takepaw8"]
 
 [ext_resource type="Script" uid="uid://b52cxmd1mk78g" path="res://game/gameplay/enemies/enemy_sphere/enemy_sphere.gd" id="1_ldn0a"]
 [ext_resource type="Script" uid="uid://dkb4crivrkpke" path="res://game/gameplay/components/mesh_anchor.gd" id="2_gsf6s"]
 [ext_resource type="PackedScene" uid="uid://yi41ime175cr" path="res://game/gameplay/enemies/enemy_sphere/red/enemy_sphere_mesh_red.tscn" id="3_fm4qq"]
 [ext_resource type="Script" uid="uid://pjqqau73xcwd" path="res://game/gameplay/components/health_component.gd" id="4_2yynh"]
 [ext_resource type="Script" uid="uid://btv2e13p4ifjo" path="res://game/gameplay/enemies/shooter_component.gd" id="5_kjo5m"]
-[ext_resource type="Resource" uid="uid://tyvguk1sc1y4" path="res://data/game/shooter_patterns/base_enemy_pattern.tres" id="6_ivstt"]
+[ext_resource type="Resource" uid="uid://ch5xn28srm3c8" path="res://data/game/shooter_patterns/red_enemy_pattern.tres" id="6_fm4qq"]
 [ext_resource type="Script" uid="uid://d657ej0ut2e7" path="res://game/gameplay/components/loopable_component.gd" id="7_pc7of"]
 [ext_resource type="Script" uid="uid://ci2pwdkhsqu5d" path="res://game/gameplay/enemies/enemy_movement_component.gd" id="8_n5ha7"]
 [ext_resource type="Script" uid="uid://dovoymatk0481" path="res://game/gameplay/components/animation_component.gd" id="9_bio38"]
@@ -16,6 +16,14 @@ height = 2.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fm4qq"]
 radius = 0.8
+
+[sub_resource type="Curve3D" id="Curve3D_hot3j"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.00734806, 0, -4.01923, 0, 0, 0, 0, 0, 0, 7.98702, 0, -4.01923, 0, 0, 0, 0, 0, 0, 8.00172, 0, 2.99054, 0, 0, 0, 0, 0, 0, -7.00242, 0, 3.00524, 0, 0, 0, 0, 0, 0, -7.01712, 0, -3.98984),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ahaa"]
 animation = &"Idle"
@@ -46,7 +54,7 @@ metadata/_custom_type_script = "uid://pjqqau73xcwd"
 
 [node name="ShooterComponent" type="Node3D" parent="."]
 script = ExtResource("5_kjo5m")
-pattern = ExtResource("6_ivstt")
+pattern = ExtResource("6_fm4qq")
 metadata/_custom_type_script = "uid://btv2e13p4ifjo"
 
 [node name="LoopableComponent" type="Area3D" parent="."]
@@ -60,10 +68,16 @@ transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1, 
 shape = SubResource("CapsuleShape3D_fm4qq")
 debug_color = Color(0.843285, 0.00105868, 0.915671, 0.42)
 
-[node name="EnemyMovementComponent" type="Node3D" parent="."]
+[node name="EnemyMovementComponent" type="Node3D" parent="." node_paths=PackedStringArray("path_node")]
 script = ExtResource("8_n5ha7")
 look_at_player = true
+movement_type = 2
+speed = 2.0
+path_node = NodePath("../Path3D")
 metadata/_custom_type_script = "uid://ci2pwdkhsqu5d"
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_hot3j")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_2xvkl")

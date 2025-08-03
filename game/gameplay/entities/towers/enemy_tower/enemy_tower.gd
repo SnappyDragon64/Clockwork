@@ -6,7 +6,9 @@ class_name EnemyTower extends BaseTower
 func _on_activated() -> void:
 	super._on_activated()
 	if current_state == State.RAISED:
+		super._on_state_change()
 		_deactivate_enemies()
+
 
 func _deactivate_enemies():
 	if enemy_paths.is_empty():

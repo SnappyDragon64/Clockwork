@@ -15,6 +15,9 @@ func _ready():
 	
 	for tower in key_towers:
 		tower.key_activated.connect(_on_key_tower_activated)
+	
+	EventBus.subscribe(Events.PLAYER_BULLET_TIME_STARTED, _on_bullet_time_started)
+	EventBus.subscribe(Events.PLAYER_BULLET_TIME_ENDED, _on_bullet_time_ended)
 
 
 func _on_key_tower_activated():
@@ -26,5 +29,13 @@ func _on_key_tower_activated():
 
 func _open_door():
 	animation_player.play("open")
+
+
+func _on_bullet_time_started(data: Dictionary) -> void:
+	animation_player.pause()
+
+
+func _on_bullet_time_ended(data: Dictionary) -> void:
+	animation_player.play("")
 	
 	

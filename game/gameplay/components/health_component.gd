@@ -46,10 +46,12 @@ func take_damage(amount: float) -> void:
 		
 	
 	if current_health == 0:
+		print("emitting")
 		died.emit()
 
 
 func add_health(amount: float) -> void:
+	print("adding health")
 	if current_health >= max_health:
 		return
 	

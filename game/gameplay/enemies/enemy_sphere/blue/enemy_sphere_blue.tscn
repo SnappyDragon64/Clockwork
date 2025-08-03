@@ -1,0 +1,68 @@
+[gd_scene load_steps=14 format=3 uid="uid://cqkpcoye7f4sg"]
+
+[ext_resource type="Script" uid="uid://b52cxmd1mk78g" path="res://game/gameplay/enemies/enemy_sphere/enemy_sphere.gd" id="1_egme0"]
+[ext_resource type="Script" uid="uid://dkb4crivrkpke" path="res://game/gameplay/components/mesh_anchor.gd" id="2_fgixx"]
+[ext_resource type="PackedScene" uid="uid://suau2y2keodx" path="res://game/gameplay/enemies/enemy_sphere/blue/enemy_sphere_mesh_blue.tscn" id="3_5ygyk"]
+[ext_resource type="Script" uid="uid://pjqqau73xcwd" path="res://game/gameplay/components/health_component.gd" id="4_oiexh"]
+[ext_resource type="Script" uid="uid://btv2e13p4ifjo" path="res://game/gameplay/enemies/shooter_component.gd" id="5_algur"]
+[ext_resource type="Resource" uid="uid://b38rovi8521tb" path="res://data/game/shooter_patterns/blue_enemy_pattern.tres" id="6_fxhjk"]
+[ext_resource type="Script" uid="uid://d657ej0ut2e7" path="res://game/gameplay/components/loopable_component.gd" id="7_sm5ww"]
+[ext_resource type="Script" uid="uid://ci2pwdkhsqu5d" path="res://game/gameplay/enemies/enemy_movement_component.gd" id="8_eufad"]
+[ext_resource type="Script" uid="uid://dovoymatk0481" path="res://game/gameplay/components/animation_component.gd" id="9_esonk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_61msn"]
+radius = 0.75
+height = 2.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fxhjk"]
+radius = 0.8
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ahaa"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2xvkl"]
+allow_transition_to_self = true
+states/Idle/node = SubResource("AnimationNodeAnimation_5ahaa")
+states/Idle/position = Vector2(535, 100)
+
+[node name="EnemySphereBlue" type="CharacterBody3D"]
+collision_layer = 8
+script = ExtResource("1_egme0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_61msn")
+
+[node name="MeshAnchor" type="Node3D" parent="."]
+script = ExtResource("2_fgixx")
+
+[node name="Mesh" parent="MeshAnchor" instance=ExtResource("3_5ygyk")]
+transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, 0, 1, 0)
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_oiexh")
+max_health = 1.0
+metadata/_custom_type_script = "uid://pjqqau73xcwd"
+
+[node name="ShooterComponent" type="Node3D" parent="."]
+script = ExtResource("5_algur")
+pattern = ExtResource("6_fxhjk")
+metadata/_custom_type_script = "uid://btv2e13p4ifjo"
+
+[node name="LoopableComponent" type="Area3D" parent="."]
+script = ExtResource("7_sm5ww")
+metadata/_custom_type_script = "uid://d657ej0ut2e7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LoopableComponent"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_fxhjk")
+debug_color = Color(0.843285, 0.00105868, 0.915671, 0.42)
+
+[node name="EnemyMovementComponent" type="Node3D" parent="."]
+script = ExtResource("8_eufad")
+look_at_player = true
+metadata/_custom_type_script = "uid://ci2pwdkhsqu5d"
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_2xvkl")
+script = ExtResource("9_esonk")

@@ -14,6 +14,7 @@ enum State {
 var _active_tween: Tween
 var _rest_position
 var _raised_position
+var _transition_lock_flag: bool = false
 
 
 func _ready():
@@ -28,20 +29,19 @@ func _ready():
 	
 	EventBus.subscribe(Events.PLAYER_BULLET_TIME_STARTED, _on_bullet_time_started)
 	EventBus.subscribe(Events.PLAYER_BULLET_TIME_ENDED, _on_bullet_time_ended)
-	
-	_on_activated()
 
 
 func _on_activated():
-	if current_state == State.REST:
-		current_state = State.RAISED
-	else:
-		current_state = State.REST
-	_on_state_change()
+	if not _transition_lock_flag:
+		_transition_lock_flag = true
+		if current_state == State.REST:
+			current_state = State.RAISED
+		else:
+			current_state = State.REST
+		_on_state_change()
 
 
 func _on_state_change():
-	print("state changing")
 	_active_tween = create_tween()
 	_active_tween.set_trans(Tween.TRANS_SINE)
 	_active_tween.set_ease(Tween.EASE_IN_OUT)
@@ -51,11 +51,19 @@ func _on_state_change():
 		_active_tween.tween_property(self, "position", _rest_position, time)
 	else:
 		_active_tween.tween_property(self, "position", _raised_position, time)
+	
+	_active_tween.finished.connect(free_transition_lock)
+
+
+func free_transition_lock() -> void:
+	_transition_lock_flag = false
 
 
 func _on_bullet_time_started(data: Dictionary) -> void:
-	_active_tween.pause()
+	if _active_tween:
+		_active_tween.pause()
 
 
 func _on_bullet_time_ended(data: Dictionary) -> void:
-	_active_tween.play()
+	if _active_tween:
+		_active_tween.play()

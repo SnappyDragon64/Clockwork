@@ -1,60 +1,67 @@
-[gd_scene load_steps=11 format=3 uid="uid://c0bdrcgnukgsh"]
+[gd_scene load_steps=14 format=3 uid="uid://7gvatfpwaswn"]
 
+[ext_resource type="Script" uid="uid://b52cxmd1mk78g" path="res://game/gameplay/enemies/enemy_sphere/enemy_sphere.gd" id="1_2xvkl"]
 [ext_resource type="Script" uid="uid://dkb4crivrkpke" path="res://game/gameplay/components/mesh_anchor.gd" id="1_jylkc"]
-[ext_resource type="PackedScene" uid="uid://b4usrewjug6vq" path="res://game/gameplay/enemies/enemy_sphere/sphere.tscn" id="2_5ahaa"]
+[ext_resource type="PackedScene" uid="uid://suau2y2keodx" path="res://game/gameplay/enemies/enemy_sphere/blue/enemy_sphere_mesh_blue.tscn" id="2_5ahaa"]
 [ext_resource type="Script" uid="uid://dovoymatk0481" path="res://game/gameplay/components/animation_component.gd" id="2_ytj8o"]
+[ext_resource type="Script" uid="uid://d657ej0ut2e7" path="res://game/gameplay/components/loopable_component.gd" id="4_jylkc"]
 [ext_resource type="Script" uid="uid://pjqqau73xcwd" path="res://game/gameplay/components/health_component.gd" id="4_xsfl5"]
 [ext_resource type="Script" uid="uid://btv2e13p4ifjo" path="res://game/gameplay/enemies/shooter_component.gd" id="5_hogbg"]
 [ext_resource type="Resource" uid="uid://tyvguk1sc1y4" path="res://data/game/shooter_patterns/base_enemy_pattern.tres" id="6_e3uer"]
 [ext_resource type="Script" uid="uid://ci2pwdkhsqu5d" path="res://game/gameplay/enemies/enemy_movement_component.gd" id="7_e3uer"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oxo8r"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_61msn"]
 radius = 0.75
-height = 2.15
+height = 2.5
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jylkc"]
-animation = &"Idle_002"
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xsfl5"]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xsfl5"]
-states/Idle/node = SubResource("AnimationNodeAnimation_jylkc")
-states/Idle/position = Vector2(524, 102)
-states/Start/position = Vector2(239, 100)
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ahaa"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_2xvkl"]
+allow_transition_to_self = true
+states/Idle/node = SubResource("AnimationNodeAnimation_5ahaa")
+states/Idle/position = Vector2(535, 100)
 
 [node name="EnemySphere" type="CharacterBody3D"]
 collision_layer = 8
-collision_mask = 3
+script = ExtResource("1_2xvkl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_61msn")
 
 [node name="MeshAnchor" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_jylkc")
 
 [node name="Mesh" parent="MeshAnchor" instance=ExtResource("2_5ahaa")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.75, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.75, 0)
-shape = SubResource("CapsuleShape3D_oxo8r")
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../MeshAnchor/Mesh")
-tree_root = SubResource("AnimationNodeStateMachine_xsfl5")
-anim_player = NodePath("../MeshAnchor/Mesh/AnimationPlayer")
-script = ExtResource("2_ytj8o")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("4_xsfl5")
+max_health = 1.0
+metadata/_custom_type_script = "uid://pjqqau73xcwd"
 
 [node name="ShooterComponent" type="Node3D" parent="."]
 script = ExtResource("5_hogbg")
 pattern = ExtResource("6_e3uer")
+metadata/_custom_type_script = "uid://btv2e13p4ifjo"
+
+[node name="LoopableComponent" type="Area3D" parent="."]
+script = ExtResource("4_jylkc")
+metadata/_custom_type_script = "uid://d657ej0ut2e7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LoopableComponent"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_xsfl5")
+debug_color = Color(0.843285, 0.00105868, 0.915671, 0.42)
 
 [node name="EnemyMovementComponent" type="Node3D" parent="."]
 script = ExtResource("7_e3uer")
 look_at_player = true
+metadata/_custom_type_script = "uid://ci2pwdkhsqu5d"
 
-
-[editable path="MeshAnchor/Mesh"]
-[node name="TimeStopComponent" type="Node" parent="."]
-process_mode = 3
-script = ExtResource("8_5ahaa")
-
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_2xvkl")
+script = ExtResource("2_ytj8o")

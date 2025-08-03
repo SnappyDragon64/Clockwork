@@ -10,7 +10,7 @@ signal ability_deactivated()
 @export var sp_for_ability: float = 25.0
 @export var ability_duration: float = 5.0
 
-var current_sp: float = 0.0
+var current_sp: float = 100.0
 var sp_after_ability: float = 0.0
 var is_ability_active: bool = false
 var _drain_timer: Timer

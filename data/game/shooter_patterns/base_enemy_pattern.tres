@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_4iyc7")
-path = "res://game/gameplay/enemies/base_bullet.tscn"
+path = "uid://b8oivy5sm13v7"
 speed = 5.0
 damage = 1.0
 lifetime = 2.0

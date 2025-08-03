@@ -1,9 +1,8 @@
-[gd_scene load_steps=26 format=4 uid="uid://biw657njqimnr"]
+[gd_scene load_steps=25 format=4 uid="uid://biw657njqimnr"]
 
 [ext_resource type="Texture2D" uid="uid://ok46leij6fis" path="res://assets/player/clockwork_Sphere.png" id="1_38nad"]
 [ext_resource type="Texture2D" uid="uid://mynqo3ir43xv" path="res://assets/player/clockwork_jetpack.png" id="2_dhj12"]
 [ext_resource type="Shader" uid="uid://dfmivttj22nhv" path="res://assets/shaders/outline.gdshader" id="2_w5ty2"]
-[ext_resource type="Animation" uid="uid://diukufpsjvh06" path="res://assets/player/animations/body_position.res" id="3_w5ty2"]
 [ext_resource type="Animation" uid="uid://byknn513kheon" path="res://assets/player/animations/key_position.res" id="4_feffv"]
 [ext_resource type="Animation" uid="uid://dx6d6oda05uxp" path="res://assets/player/animations/key_rotation.res" id="5_8ht5k"]
 
@@ -227,17 +226,6 @@ orientation = 0
 
 [sub_resource type="Animation" id="Animation_38nad"]
 length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Cube:rotation:y")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dhj12"]
 _data = {
@@ -246,9 +234,8 @@ _data = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sxrg5"]
 _data = {
-&"body_position": ExtResource("3_w5ty2"),
-&"key_position": ExtResource("4_feffv"),
-&"key_rotation": ExtResource("5_8ht5k")
+&"position": ExtResource("4_feffv"),
+&"rotation": ExtResource("5_8ht5k")
 }
 
 [node name="clockwork" type="Node3D"]
@@ -271,6 +258,7 @@ mesh = SubResource("ArrayMesh_am1ia")
 skeleton = NodePath("")
 
 [node name="Cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.829852, 0, 0.557984, 0, 1, 0, -0.557984, 0, -0.829852, 0, 0, 0)
 mesh = SubResource("ArrayMesh_42v3h")
 skeleton = NodePath("")
 
